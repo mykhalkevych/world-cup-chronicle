@@ -6,10 +6,12 @@ import {
 } from '@angular/ssr/node';
 import express from 'express';
 import { join } from 'node:path';
+import { createRequire } from 'node:module';
 
-// Load .env for local development only
+// Load .env synchronously so env vars are available before first SSR request
 if (process.env['NODE_ENV'] !== 'production') {
-  import('dotenv').then(({ config }) => config()).catch(() => {});
+  const require = createRequire(import.meta.url);
+  try { require('dotenv').config(); } catch { /* dotenv optional */ }
 }
 
 const browserDistFolder = join(import.meta.dirname, '../browser');
