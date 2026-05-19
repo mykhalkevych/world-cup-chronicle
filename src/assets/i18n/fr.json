@@ -1,0 +1,67 @@
+{
+  "nav": {
+    "home": "Accueil",
+    "archive": "Archives",
+    "worldCup2026": "Coupe du Monde 2026",
+    "players": "Joueurs",
+    "language": "Langue"
+  },
+  "masthead": {
+    "subtitle": "Une Histoire Complète des Coupes du Monde de la FIFA",
+    "edition": "Édition Nº {{number}}"
+  },
+  "home": {
+    "title": "The World Cup Chronicle",
+    "editorDesk": "Le Bureau du Rédacteur",
+    "allTournaments": "Tous les Tournois",
+    "selectTournament": "Sélectionner un Tournoi"
+  },
+  "tournament": {
+    "champion": "Champion",
+    "runnerUp": "Finaliste",
+    "thirdPlace": "Troisième Place",
+    "topScorer": "Meilleur Buteur",
+    "goals": "{{count}} buts marqués",
+    "teams": "{{count}} équipes",
+    "pageTitle": "Coupe du Monde {{year}} — The World Cup Chronicle",
+    "clippings": "Des Archives",
+    "hostCountry": "Pays Hôte"
+  },
+  "player": {
+    "yearsActive": "Années Actif",
+    "goals": "Buts en Coupe du Monde",
+    "tournaments": "Tournois",
+    "pageTitle": "{{name}} — The World Cup Chronicle"
+  },
+  "moment": {
+    "minute": "Minute {{min}}",
+    "pageTitle": "{{name}} — The World Cup Chronicle",
+    "perspectives": "La Presse"
+  },
+  "archive": {
+    "title": "Les Archives",
+    "search": "Rechercher dans les archives…",
+    "searchButton": "Rechercher",
+    "noResults": "Aucune coupure trouvée pour « {{query}} »"
+  },
+  "2026": {
+    "breaking": "FLASH",
+    "live": "EN DIRECT",
+    "lastUpdated": "Mis à jour il y a {{time}} min",
+    "results": "Résultats",
+    "standings": "Classements de Groupes",
+    "bracket": "Tableau Éliminatoire",
+    "topScorers": "Meilleurs Buteurs",
+    "noScores": "Scores indisponibles — revenez bientôt",
+    "specialEdition": "Édition Spéciale 2026",
+    "hosts": "États-Unis · Canada · Mexique · Juin–Juillet 2026"
+  },
+  "errors": {
+    "archiveUnavailable": "Archives Temporairement Indisponibles",
+    "archiveUnavailableBody": "Nos correspondants travaillent à restaurer les archives. Veuillez revenir bientôt.",
+    "notFound": "Page Introuvable",
+    "notFoundBody": "Cette page semble s'être perdue dans les archives. Elle a peut-être été classée sous la mauvaise année.",
+    "serverError": "Erreur de Presse",
+    "serverErrorBody": "Notre imprimerie a rencontré un défaut mécanique. Nos ingénieurs ont été informés."
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "nav": {
+    "home": "Home",
+    "archive": "Archive",
+    "worldCup2026": "World Cup 2026",
+    "players": "Players",
+    "language": "Language"
+  },
+  "masthead": {
+    "subtitle": "A Complete History of FIFA World Cups",
+    "edition": "Edition No. {{number}}"
+  },
+  "home": {
+    "title": "The World Cup Chronicle",
+    "editorDesk": "The Editor's Desk",
+    "allTournaments": "All Tournaments",
+    "selectTournament": "Select a Tournament"
+  },
+  "tournament": {
+    "champion": "Champion",
+    "runnerUp": "Runner-Up",
+    "thirdPlace": "Third Place",
+    "topScorer": "Top Scorer",
+    "goals": "{{count}} goals scored",
+    "teams": "{{count}} teams",
+    "pageTitle": "{{year}} FIFA World Cup — The World Cup Chronicle",
+    "clippings": "From the Archive",
+    "hostCountry": "Host Country"
+  },
+  "player": {
+    "yearsActive": "Years Active",
+    "goals": "World Cup Goals",
+    "tournaments": "Tournaments",
+    "pageTitle": "{{name}} — The World Cup Chronicle"
+  },
+  "moment": {
+    "minute": "Minute {{min}}",
+    "pageTitle": "{{name}} — The World Cup Chronicle",
+    "perspectives": "From the Press"
+  },
+  "archive": {
+    "title": "The Archive",
+    "search": "Search the archive…",
+    "searchButton": "Search",
+    "noResults": "No clippings found for \"{{query}}\""
+  },
+  "2026": {
+    "breaking": "BREAKING",
+    "live": "LIVE",
+    "lastUpdated": "Last updated {{time}} min ago",
+    "results": "Match Results",
+    "standings": "Group Standings",
+    "bracket": "Knockout Bracket",
+    "topScorers": "Top Scorers",
+    "noScores": "Scores unavailable — check back soon",
+    "specialEdition": "2026 Special Edition",
+    "hosts": "USA · Canada · Mexico · June–July 2026"
+  },
+  "errors": {
+    "archiveUnavailable": "Archive Temporarily Unavailable",
+    "archiveUnavailableBody": "Our correspondents are working to restore the archive. Please check back shortly.",
+    "notFound": "Page Not Found",
+    "notFoundBody": "This page appears to have been lost in the archive. Perhaps it was filed under the wrong year.",
+    "serverError": "Printing Press Error",
+    "serverErrorBody": "Our printing press has encountered a mechanical fault. Our engineers have been notified."
+  }
+}

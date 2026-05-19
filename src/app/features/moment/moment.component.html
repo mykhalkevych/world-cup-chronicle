@@ -1,0 +1,34 @@
+<div class="newspaper-page">
+  <div class="page-container">
+    <app-masthead />
+
+    @if (moment(); as m) {
+      <article class="moment-page">
+        <header class="moment-page__header">
+          <p class="byline meta">{{ 'moment.minute' | translate: { min: m.minute } }}</p>
+          <h1 class="moment-page__title">{{ m.name }}</h1>
+        </header>
+
+        <hr class="rule rule--double" />
+
+        <p class="moment-page__description">{{ m.description }}</p>
+
+        @if (clippings().length) {
+          <section class="moment-page__perspectives">
+            <h2 class="section-heading">{{ 'moment.perspectives' | translate }}</h2>
+            <div class="columns-grid">
+              @for (clipping of clippings(); track clipping.id) {
+                <app-newspaper-clipping [clipping]="clipping" />
+              }
+            </div>
+          </section>
+        }
+      </article>
+    } @else {
+      <div class="archive-unavailable">
+        <h2>{{ 'errors.archiveUnavailable' | translate }}</h2>
+        <p>{{ 'errors.archiveUnavailableBody' | translate }}</p>
+      </div>
+    }
+  </div>
+</div>

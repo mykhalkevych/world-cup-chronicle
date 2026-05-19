@@ -1,0 +1,135 @@
+<div class="newspaper-page">
+  <div class="page-container">
+    <app-masthead [edition]="22" />
+
+    <!-- Editor's introduction -->
+    <section class="editors-note">
+      <div class="editors-note__inner">
+        <p class="editors-note__text">
+          From the sun-drenched stadiums of Uruguay in 1930 to the floodlit arenas of Qatar in 2022 —
+          ninety-two years of glory, heartbreak, controversy and genius, preserved here as they were
+          first reported: in the morning's ink.
+        </p>
+        <span class="editors-note__sig byline">— The Editor, {{ 'home.editorDesk' | translate }}</span>
+      </div>
+    </section>
+
+    <hr class="rule rule--double" />
+
+    <!-- ERA: 1930s -->
+    <section class="era-section era-1930" aria-label="1930s tournaments">
+      <header class="era-section__header">
+        <h2 class="era-section__decade">1930s</h2>
+        <span class="era-section__label byline">The Pioneer Years</span>
+      </header>
+      <div class="era-section__grid">
+        @for (t of era1930s; track t.year) {
+          <a [routerLink]="['/tournament', t.year]" class="tournament-card"
+             (click)="onTournamentOpen(t.year)" [attr.aria-label]="t.year + ' World Cup, ' + t.host">
+            <div class="tournament-card__year">{{ t.year }}</div>
+            <div class="tournament-card__host">{{ t.host }}</div>
+            <div class="tournament-card__champion">{{ t.champion }}</div>
+          </a>
+        }
+      </div>
+    </section>
+
+    <hr class="rule" />
+
+    <!-- ERA: 1950s -->
+    <section class="era-section era-1950" aria-label="1950s tournaments">
+      <header class="era-section__header">
+        <h2 class="era-section__decade">1950s</h2>
+        <span class="era-section__label byline">The Golden Age</span>
+      </header>
+      <div class="era-section__grid">
+        @for (t of era1950s; track t.year) {
+          <a [routerLink]="['/tournament', t.year]" class="tournament-card"
+             (click)="onTournamentOpen(t.year)" [attr.aria-label]="t.year + ' World Cup, ' + t.host">
+            <div class="tournament-card__year">{{ t.year }}</div>
+            <div class="tournament-card__host">{{ t.host }}</div>
+            <div class="tournament-card__champion">{{ t.champion }}</div>
+          </a>
+        }
+      </div>
+    </section>
+
+    <hr class="rule" />
+
+    <!-- ERA: 1960s–70s -->
+    <section class="era-section era-1966" aria-label="1960s and 70s tournaments">
+      <header class="era-section__header">
+        <h2 class="era-section__decade">1960s – 70s</h2>
+        <span class="era-section__label byline">The Broadsheet Era</span>
+      </header>
+      <div class="era-section__grid">
+        @for (t of era1960s70s; track t.year) {
+          <a [routerLink]="['/tournament', t.year]" class="tournament-card"
+             (click)="onTournamentOpen(t.year)" [attr.aria-label]="t.year + ' World Cup, ' + t.host">
+            <div class="tournament-card__year">{{ t.year }}</div>
+            <div class="tournament-card__host">{{ t.host }}</div>
+            <div class="tournament-card__champion">{{ t.champion }}</div>
+          </a>
+        }
+      </div>
+    </section>
+
+    <hr class="rule" />
+
+    <!-- ERA: 1980s–90s -->
+    <section class="era-section era-1986" aria-label="1980s and 90s tournaments">
+      <header class="era-section__header">
+        <h2 class="era-section__decade">1980s – 90s</h2>
+        <span class="era-section__label byline">The Tabloid Years</span>
+      </header>
+      <div class="era-section__grid">
+        @for (t of era1980s90s; track t.year) {
+          <a [routerLink]="['/tournament', t.year]" class="tournament-card"
+             (click)="onTournamentOpen(t.year)" [attr.aria-label]="t.year + ' World Cup, ' + t.host">
+            <div class="tournament-card__year">{{ t.year }}</div>
+            <div class="tournament-card__host">{{ t.host }}</div>
+            <div class="tournament-card__champion">{{ t.champion }}</div>
+          </a>
+        }
+      </div>
+    </section>
+
+    <hr class="rule" />
+
+    <!-- ERA: 2000s+ -->
+    <section class="era-section era-2002" aria-label="2000s and 2010s tournaments">
+      <header class="era-section__header">
+        <h2 class="era-section__decade">2000s – 2020s</h2>
+        <span class="era-section__label byline">The Modern Archive</span>
+      </header>
+      <div class="era-section__grid">
+        @for (t of era2000s; track t.year) {
+          <a [routerLink]="['/tournament', t.year]" class="tournament-card"
+             (click)="onTournamentOpen(t.year)" [attr.aria-label]="t.year + ' World Cup, ' + t.host">
+            <div class="tournament-card__year">{{ t.year }}</div>
+            <div class="tournament-card__host">{{ t.host }}</div>
+            <div class="tournament-card__champion">{{ t.champion }}</div>
+          </a>
+        }
+      </div>
+    </section>
+
+    <hr class="rule rule--double" />
+
+    <!-- LIVE: 2026 -->
+    <section class="era-section era-2026 live-section" aria-label="2026 World Cup">
+      <header class="era-section__header">
+        <h2 class="era-section__decade">2026</h2>
+        <span class="era-section__label">
+          <span class="breaking-badge">LIVE</span>
+          USA · Canada · Mexico
+        </span>
+      </header>
+      <a routerLink="/2026" class="live-banner" (click)="onTournamentOpen(2026)">
+        <div class="live-banner__headline">Follow Every Match As It Happens</div>
+        <div class="live-banner__sub byline">Results · Standings · Top Scorers · Breaking News →</div>
+      </a>
+    </section>
+
+  </div>
+</div>

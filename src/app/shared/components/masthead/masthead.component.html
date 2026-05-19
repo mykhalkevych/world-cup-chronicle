@@ -1,0 +1,32 @@
+<header class="masthead" [class.masthead--live]="isLive()">
+  <div class="masthead__top-rule rule rule--double"></div>
+
+  <div class="masthead__nav-row">
+    <nav aria-label="Main navigation">
+      <a routerLink="/">{{ 'nav.home' | translate }}</a>
+      <a routerLink="/archive">{{ 'nav.archive' | translate }}</a>
+      <a routerLink="/2026" class="masthead__live-link">
+        @if (isLive()) {
+          <span class="breaking-badge">LIVE</span>
+        }
+        {{ 'nav.worldCup2026' | translate }}
+      </a>
+    </nav>
+    <app-locale-switcher />
+  </div>
+
+  <div class="masthead__title-row">
+    <a routerLink="/" class="masthead__name-link">
+      <h1 class="masthead__name">{{ name() }}</h1>
+    </a>
+    @if (edition()) {
+      <p class="masthead__edition meta">
+        {{ 'masthead.edition' | translate: { number: edition() } }}
+      </p>
+    }
+  </div>
+
+  <p class="masthead__subtitle byline">{{ subtitle() }}</p>
+
+  <div class="masthead__bottom-rule rule"></div>
+</header>

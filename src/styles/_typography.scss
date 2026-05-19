@@ -1,0 +1,100 @@
+// Newspaper fonts — loaded locally from src/assets/fonts/
+// Download via google-webfonts-helper and place in assets/fonts/
+
+// Gothic blackletter for 1930s–40s headlines
+@font-face {
+  font-family: 'UnifrakturMaguntia';
+  src: url('/assets/fonts/UnifrakturMaguntia/UnifrakturMaguntia-Book.woff2') format('woff2'),
+       url('/assets/fonts/UnifrakturMaguntia/UnifrakturMaguntia-Book.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+// Primary headline font for all modern eras
+@font-face {
+  font-family: 'Playfair Display';
+  src: url('/assets/fonts/PlayfairDisplay/PlayfairDisplay-Regular.woff2') format('woff2'),
+       url('/assets/fonts/PlayfairDisplay/PlayfairDisplay-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Playfair Display';
+  src: url('/assets/fonts/PlayfairDisplay/PlayfairDisplay-Italic.woff2') format('woff2'),
+       url('/assets/fonts/PlayfairDisplay/PlayfairDisplay-Italic.woff') format('woff');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Playfair Display';
+  src: url('/assets/fonts/PlayfairDisplay/PlayfairDisplay-Bold.woff2') format('woff2'),
+       url('/assets/fonts/PlayfairDisplay/PlayfairDisplay-Bold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Playfair Display';
+  src: url('/assets/fonts/PlayfairDisplay/PlayfairDisplay-Black.woff2') format('woff2'),
+       url('/assets/fonts/PlayfairDisplay/PlayfairDisplay-Black.woff') format('woff');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+// Metadata, bylines, newspaper name
+@font-face {
+  font-family: 'Special Elite';
+  src: url('/assets/fonts/SpecialElite/SpecialElite-Regular.woff2') format('woff2'),
+       url('/assets/fonts/SpecialElite/SpecialElite-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+// Body text inside clippings
+@font-face {
+  font-family: 'Libre Baskerville';
+  src: url('/assets/fonts/LibreBaskerville/LibreBaskerville-Regular.woff2') format('woff2'),
+       url('/assets/fonts/LibreBaskerville/LibreBaskerville-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Libre Baskerville';
+  src: url('/assets/fonts/LibreBaskerville/LibreBaskerville-Italic.woff2') format('woff2'),
+       url('/assets/fonts/LibreBaskerville/LibreBaskerville-Italic.woff') format('woff');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+// Typography scale
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-headline);
+  color: var(--ink-color);
+  line-height: 1.15;
+}
+
+p, li, td, th {
+  font-family: var(--font-body);
+  color: var(--ink-color);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.byline,
+.source,
+.meta {
+  font-family: var(--font-meta);
+  color: var(--ink-secondary);
+  font-size: 12px;
+}

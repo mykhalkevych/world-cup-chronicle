@@ -1,0 +1,60 @@
+.player-dossier {
+  max-width: 800px;
+  margin: 3rem auto;
+
+  &__header {
+    margin-bottom: 1rem;
+  }
+
+  &__name {
+    font-family: var(--font-headline);
+    font-size: 3rem;
+    font-weight: 900;
+    line-height: 1;
+    margin-bottom: 0.25rem;
+  }
+
+  &__nickname {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  &__meta {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    font-size: 0.75rem;
+  }
+
+  &__stats {
+    display: flex;
+    gap: 2rem;
+    margin: 1rem 0;
+    flex-wrap: wrap;
+
+    .stat__label {
+      display: block;
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .stat__value {
+      font-family: var(--font-headline);
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+  }
+
+  &__bio {
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    line-height: 1.7;
+    column-count: 2;
+    column-gap: 1.5rem;
+
+    @media (max-width: 600px) {
+      column-count: 1;
+    }
+  }
+}

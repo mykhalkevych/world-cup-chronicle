@@ -1,0 +1,90 @@
+@use 'styles/variables';
+@use 'styles/typography';
+@use 'styles/textures';
+@use 'styles/animations';
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--paper-bg);
+  color: var(--ink-color);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  transition: background-color 0.6s ease, color 0.3s ease;
+}
+
+a {
+  color: var(--ink-color);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+
+  &:hover {
+    color: var(--accent-color);
+  }
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+// Newspaper column grid
+.columns-grid {
+  display: grid;
+  grid-template-columns: repeat(var(--column-count, 3), 1fr);
+  gap: 1.5rem;
+  align-items: start;
+
+  @media (max-width: 900px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: 600px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+// Container
+.page-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+// Visually hidden (a11y)
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+// Archive unavailable notice (torn clipping style)
+.archive-unavailable {
+  border: 2px dashed color-mix(in srgb, var(--ink-color) 40%, transparent);
+  padding: 2rem;
+  text-align: center;
+  font-family: var(--font-meta);
+  color: var(--ink-secondary);
+  background: color-mix(in srgb, var(--paper-bg) 80%, transparent);
+
+  h2 {
+    font-family: var(--font-headline);
+    margin-bottom: 0.5rem;
+    font-size: 1.5rem;
+  }
+}

@@ -1,0 +1,45 @@
+<article
+  class="clipping"
+  [class.clipping--featured]="clipping().isFeatured || clipping().size === 'featured'"
+  [class.clipping--wide]="clipping().size === 'wide'"
+  [class.clipping--small]="clipping().size === 'small'"
+  [style.transform]="rotationStyle"
+  [attr.tabindex]="0"
+  [attr.role]="'article'"
+  (click)="clicked.emit(clipping())"
+  (keydown.enter)="onEnter()">
+
+  @if (clipping().score) {
+    <div class="score-box">{{ clipping().score }}</div>
+  }
+
+  <h2 class="clipping__headline">{{ clipping().headline }}</h2>
+
+  @if (clipping().deck) {
+    <p class="clipping__deck">{{ clipping().deck }}</p>
+  }
+
+  @if (clipping().photoEmoji) {
+    <div class="clipping__photo" [attr.aria-label]="clipping().photoCaption || clipping().headline">
+      <span class="clipping__photo-emoji" aria-hidden="true">{{ clipping().photoEmoji }}</span>
+      @if (clipping().photoCaption) {
+        <p class="clipping__photo-caption">{{ clipping().photoCaption }}</p>
+      }
+    </div>
+  }
+
+  <div class="clipping__body">
+    <p>{{ clipping().body }}</p>
+  </div>
+
+  <footer class="clipping__footer">
+    <span class="byline source">{{ clipping().source }}</span>
+    @if (clipping().country) {
+      <span class="byline meta clipping__country">{{ clipping().country }}</span>
+    }
+  </footer>
+
+  @for (tag of clipping().tags; track tag) {
+    <span class="clipping__tag">{{ tag }}</span>
+  }
+</article>

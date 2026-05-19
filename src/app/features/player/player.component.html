@@ -1,0 +1,47 @@
+<div class="newspaper-page">
+  <div class="page-container">
+    <app-masthead />
+
+    @if (player(); as p) {
+      <article class="player-dossier clipping">
+        <header class="player-dossier__header">
+          <h1 class="player-dossier__name">{{ p.name }}</h1>
+          @if (p.nickname) {
+            <p class="player-dossier__nickname byline">"{{ p.nickname }}"</p>
+          }
+          <div class="player-dossier__meta">
+            <span class="meta">{{ p.country }}</span>
+            <span class="meta">·</span>
+            <span class="meta">{{ p.role }}</span>
+            <span class="meta">·</span>
+            <span class="meta">{{ 'player.yearsActive' | translate }}: {{ p.yearsActive }}</span>
+          </div>
+        </header>
+
+        <hr class="rule" />
+
+        <div class="player-dossier__stats">
+          <div>
+            <span class="stat__label byline">{{ 'player.goals' | translate }}</span>
+            <span class="stat__value">{{ p.goals }}</span>
+          </div>
+          <div>
+            <span class="stat__label byline">{{ 'player.tournaments' | translate }}</span>
+            <span class="stat__value">{{ p.tournaments.join(', ') }}</span>
+          </div>
+        </div>
+
+        <hr class="rule" />
+
+        <div class="player-dossier__bio">
+          <p>{{ p.bio }}</p>
+        </div>
+      </article>
+    } @else {
+      <div class="archive-unavailable">
+        <h2>{{ 'errors.archiveUnavailable' | translate }}</h2>
+        <p>{{ 'errors.archiveUnavailableBody' | translate }}</p>
+      </div>
+    }
+  </div>
+</div>
