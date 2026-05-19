@@ -1,11 +1,9 @@
-// Newspaper fonts — loaded locally from src/assets/fonts/
-// Download via google-webfonts-helper and place in assets/fonts/
+// Newspaper fonts — served locally from src/assets/fonts/
 
-// Gothic blackletter for 1930s–40s headlines
+// Gothic blackletter for 1930s–40s headlines (TTF only available for this font)
 @font-face {
   font-family: 'UnifrakturMaguntia';
-  src: url('/assets/fonts/UnifrakturMaguntia/UnifrakturMaguntia-Book.woff2') format('woff2'),
-       url('/assets/fonts/UnifrakturMaguntia/UnifrakturMaguntia-Book.woff') format('woff');
+  src: url('/assets/fonts/unifraktur-maguntia-v22-latin-regular.ttf') format('truetype');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -14,8 +12,7 @@
 // Primary headline font for all modern eras
 @font-face {
   font-family: 'Playfair Display';
-  src: url('/assets/fonts/PlayfairDisplay/PlayfairDisplay-Regular.woff2') format('woff2'),
-       url('/assets/fonts/PlayfairDisplay/PlayfairDisplay-Regular.woff') format('woff');
+  src: url('/assets/fonts/playfair-display-v40-latin-regular.woff2') format('woff2');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -23,8 +20,7 @@
 
 @font-face {
   font-family: 'Playfair Display';
-  src: url('/assets/fonts/PlayfairDisplay/PlayfairDisplay-Italic.woff2') format('woff2'),
-       url('/assets/fonts/PlayfairDisplay/PlayfairDisplay-Italic.woff') format('woff');
+  src: url('/assets/fonts/playfair-display-v40-latin-italic.woff2') format('woff2');
   font-weight: 400;
   font-style: italic;
   font-display: swap;
@@ -32,8 +28,7 @@
 
 @font-face {
   font-family: 'Playfair Display';
-  src: url('/assets/fonts/PlayfairDisplay/PlayfairDisplay-Bold.woff2') format('woff2'),
-       url('/assets/fonts/PlayfairDisplay/PlayfairDisplay-Bold.woff') format('woff');
+  src: url('/assets/fonts/playfair-display-v40-latin-700.woff2') format('woff2');
   font-weight: 700;
   font-style: normal;
   font-display: swap;
@@ -41,18 +36,32 @@
 
 @font-face {
   font-family: 'Playfair Display';
-  src: url('/assets/fonts/PlayfairDisplay/PlayfairDisplay-Black.woff2') format('woff2'),
-       url('/assets/fonts/PlayfairDisplay/PlayfairDisplay-Black.woff') format('woff');
+  src: url('/assets/fonts/playfair-display-v40-latin-700italic.woff2') format('woff2');
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Playfair Display';
+  src: url('/assets/fonts/playfair-display-v40-latin-900.woff2') format('woff2');
   font-weight: 900;
   font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Playfair Display';
+  src: url('/assets/fonts/playfair-display-v40-latin-900italic.woff2') format('woff2');
+  font-weight: 900;
+  font-style: italic;
   font-display: swap;
 }
 
 // Metadata, bylines, newspaper name
 @font-face {
   font-family: 'Special Elite';
-  src: url('/assets/fonts/SpecialElite/SpecialElite-Regular.woff2') format('woff2'),
-       url('/assets/fonts/SpecialElite/SpecialElite-Regular.woff') format('woff');
+  src: url('/assets/fonts/special-elite-v20-latin-regular.woff2') format('woff2');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -61,8 +70,7 @@
 // Body text inside clippings
 @font-face {
   font-family: 'Libre Baskerville';
-  src: url('/assets/fonts/LibreBaskerville/LibreBaskerville-Regular.woff2') format('woff2'),
-       url('/assets/fonts/LibreBaskerville/LibreBaskerville-Regular.woff') format('woff');
+  src: url('/assets/fonts/libre-baskerville-v24-latin-regular.woff2') format('woff2');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -70,10 +78,17 @@
 
 @font-face {
   font-family: 'Libre Baskerville';
-  src: url('/assets/fonts/LibreBaskerville/LibreBaskerville-Italic.woff2') format('woff2'),
-       url('/assets/fonts/LibreBaskerville/LibreBaskerville-Italic.woff') format('woff');
+  src: url('/assets/fonts/libre-baskerville-v24-latin-italic.woff2') format('woff2');
   font-weight: 400;
   font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Libre Baskerville';
+  src: url('/assets/fonts/libre-baskerville-v24-latin-700.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
   font-display: swap;
 }
 
