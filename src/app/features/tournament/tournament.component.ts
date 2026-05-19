@@ -33,7 +33,7 @@ export class TournamentComponent implements OnInit, OnDestroy {
   featuredClipping = signal<Clipping | null>(null);
 
   ngOnInit(): void {
-    const data = this.route.snapshot.data as TournamentPageData;
+    const data = this.route.snapshot.data['tournament'] as TournamentPageData;
     if (data.tournament) {
       this.tournament.set(data.tournament);
       this.clippings.set(data.clippings);
