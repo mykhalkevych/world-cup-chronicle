@@ -19,7 +19,3 @@ env:
     secret: NOTION_MOMENTS_DB
   - variable: API_FOOTBALL_KEY
     secret: API_FOOTBALL_KEY
-  - variable: UMAMI_WEBSITE_ID
-    secret: UMAMI_WEBSITE_ID
-  - variable: UMAMI_URL
-    secret: UMAMI_URL

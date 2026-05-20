@@ -4,7 +4,6 @@ import { Title } from '@angular/platform-browser';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { MastheadComponent } from '../../shared/components/masthead/masthead.component';
 import { NewspaperClippingComponent } from '../../shared/components/newspaper-clipping/newspaper-clipping.component';
-import { AnalyticsService } from '../../core/services/analytics.service';
 import { Moment } from '../../core/models/moment.model';
 import { Clipping } from '../../core/models/clipping.model';
 import { MomentPageData } from './moment.resolver';
@@ -21,8 +20,6 @@ export class MomentComponent implements OnInit {
   private route = inject(ActivatedRoute);
   private titleService = inject(Title);
   private translate = inject(TranslateService);
-  private analytics = inject(AnalyticsService);
-
   moment = signal<Moment | null>(null);
   clippings = signal<Clipping[]>([]);
 
@@ -35,7 +32,6 @@ export class MomentComponent implements OnInit {
       this.translate
         .get('moment.pageTitle', { name: data.moment.name })
         .subscribe(title => this.titleService.setTitle(title));
-      this.analytics.trackEvent('moment-open', { slug: data.moment.slug });
     } else {
       this.titleService.setTitle('Moment — The World Cup Chronicle');
     }
