@@ -17,5 +17,3 @@ env:
     secret: NOTION_PLAYERS_DB
   - variable: NOTION_MOMENTS_DB
     secret: NOTION_MOMENTS_DB
-  - variable: API_FOOTBALL_KEY
-    secret: API_FOOTBALL_KEY
