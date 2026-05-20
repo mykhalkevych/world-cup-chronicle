@@ -1,0 +1,74 @@
+<div class="newspaper-page">
+  @if (tournament(); as t) {
+    <div class="page-container">
+      <app-masthead
+        [name]="t.mastheadName"
+        [subtitle]="t.mastheadSubtitle" />
+
+      <section class="tournament-header">
+        <h1 class="tournament-header__title">{{ t.name }}</h1>
+
+        <div class="tournament-header__stats">
+          <div class="stat">
+            <span class="stat__label byline">{{ 'tournament.hostCountry' | translate }}</span>
+            <span class="stat__value">{{ t.hostCountry }}</span>
+          </div>
+          <div class="stat">
+            <span class="stat__label byline">{{ 'tournament.champion' | translate }}</span>
+            <span class="stat__value">{{ t.champion }}</span>
+          </div>
+          <div class="stat">
+            <span class="stat__label byline">{{ 'tournament.runnerUp' | translate }}</span>
+            <span class="stat__value">{{ t.runnerUp }}</span>
+          </div>
+          <div class="stat">
+            <span class="stat__label byline">{{ 'tournament.topScorer' | translate }}</span>
+            <span class="stat__value">{{ t.topScorer }}</span>
+          </div>
+          <div class="stat">
+            <span class="stat__label byline">{{ 'tournament.goals' | translate: { count: t.goalsTotal } }}</span>
+          </div>
+          <div class="stat">
+            <span class="stat__label byline">{{ 'tournament.teams' | translate: { count: t.teams } }}</span>
+          </div>
+        </div>
+
+        @if (t.summary) {
+          <p class="tournament-header__summary">{{ t.summary }}</p>
+        }
+
+        <hr class="rule rule--double" />
+      </section>
+
+      @if (featuredClipping(); as featured) {
+        <div class="featured-wrapper">
+          <app-newspaper-clipping [clipping]="featured" (clicked)="onClippingClick($event)" />
+        </div>
+        <hr class="rule" />
+      }
+
+      @if (clippings().length) {
+        <section aria-label="Archive clippings">
+          <h2 class="section-heading">{{ 'tournament.clippings' | translate }}</h2>
+          <div class="columns-grid">
+            @for (clipping of regularClippings; track clipping.id) {
+              <app-newspaper-clipping [clipping]="clipping" (clicked)="onClippingClick($event)" />
+            }
+          </div>
+        </section>
+      } @else {
+        <div class="archive-unavailable">
+          <h2>{{ 'errors.archiveUnavailable' | translate }}</h2>
+          <p>{{ 'errors.archiveUnavailableBody' | translate }}</p>
+        </div>
+      }
+    </div>
+  } @else {
+    <div class="page-container">
+      <div class="archive-unavailable">
+        <h2>{{ 'errors.archiveUnavailable' | translate }}</h2>
+        <p>{{ 'errors.archiveUnavailableBody' | translate }}</p>
+      </div>
+    </div>
+  }
+</div>

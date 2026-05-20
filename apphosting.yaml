@@ -1,0 +1,25 @@
+runConfig:
+  runtime: nodejs20
+  concurrency: 80
+  cpu: 1
+  memoryMiB: 512
+  minInstances: 0
+  maxInstances: 10
+
+env:
+  - variable: NOTION_TOKEN
+    secret: NOTION_TOKEN
+  - variable: NOTION_TOURNAMENTS_DB
+    secret: NOTION_TOURNAMENTS_DB
+  - variable: NOTION_CLIPPINGS_DB
+    secret: NOTION_CLIPPINGS_DB
+  - variable: NOTION_PLAYERS_DB
+    secret: NOTION_PLAYERS_DB
+  - variable: NOTION_MOMENTS_DB
+    secret: NOTION_MOMENTS_DB
+  - variable: API_FOOTBALL_KEY
+    secret: API_FOOTBALL_KEY
+  - variable: UMAMI_WEBSITE_ID
+    secret: UMAMI_WEBSITE_ID
+  - variable: UMAMI_URL
+    secret: UMAMI_URL

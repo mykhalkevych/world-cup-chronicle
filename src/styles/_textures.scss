@@ -1,0 +1,92 @@
+// Paper grain and aging effects
+
+.newspaper-page {
+  background-color: var(--paper-bg);
+  filter: var(--paper-filter);
+  min-height: 100vh;
+  position: relative;
+
+  &::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: var(--grain-opacity);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+  }
+}
+
+.clipping {
+  background: var(--paper-bg);
+  border: 1px solid color-mix(in srgb, var(--ink-color) 30%, transparent);
+  box-shadow: var(--clipping-shadow);
+  padding: 1.25rem;
+  position: relative;
+  break-inside: avoid;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+
+  // Slight rotation is applied deterministically from clipping id in component
+  &:hover {
+    transform: rotate(0deg) scale(1.03) translateY(-4px) !important;
+    box-shadow: 6px 10px 24px rgba(0, 0, 0, 0.3);
+    z-index: 10;
+  }
+
+  &--featured {
+    grid-column: 1 / -1;
+    border-width: 2px;
+  }
+
+  &--wide {
+    grid-column: span 2;
+  }
+
+  &--small {
+    font-size: 0.9em;
+  }
+}
+
+// Torn-clipping top edge effect
+.clipping::after {
+  content: '';
+  position: absolute;
+  top: -3px;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    color-mix(in srgb, var(--ink-color) 10%, transparent) 20%,
+    transparent 40%,
+    color-mix(in srgb, var(--ink-color) 8%, transparent) 60%,
+    transparent 80%,
+    color-mix(in srgb, var(--ink-color) 12%, transparent) 100%
+  );
+}
+
+// Score box
+.score-box {
+  border: var(--border-style);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.25rem 0.75rem;
+  font-family: var(--font-headline);
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: var(--ink-color);
+}
+
+// Divider rule (newspaper horizontal rule)
+.rule {
+  border: none;
+  border-top: var(--border-style);
+  margin: 1rem 0;
+
+  &--double {
+    border-top: 3px double color-mix(in srgb, var(--ink-color) 60%, transparent);
+  }
+}

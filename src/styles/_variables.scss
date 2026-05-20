@@ -1,0 +1,114 @@
+// Era-based CSS Custom Properties
+// Applied to <body> via .era-YEAR classes by EraThemeService
+
+// --- 1930s: black-and-white offset ---
+.era-1930, .era-1934, .era-1938 {
+  --paper-bg: #e8dcc8;
+  --paper-filter: sepia(0.9) contrast(1.15) brightness(0.88);
+  --ink-color: #1a0f00;
+  --ink-secondary: #4a3520;
+  --accent-color: #1a0f00;
+  --border-style: 3px double #2a1a0e;
+  --font-headline: 'UnifrakturMaguntia', serif;
+  --font-body: 'Libre Baskerville', serif;
+  --font-meta: 'Special Elite', cursive;
+  --grain-opacity: 0.12;
+  --column-count: 3;
+  --clipping-shadow: 2px 3px 8px rgba(0, 0, 0, 0.3);
+}
+
+// --- 1950s: yellowed newsprint ---
+.era-1950, .era-1954, .era-1958 {
+  --paper-bg: #f0e2c0;
+  --paper-filter: sepia(0.7) contrast(1.1) brightness(0.92);
+  --ink-color: #160c00;
+  --ink-secondary: #3d2b10;
+  --accent-color: #160c00;
+  --border-style: 2px solid #3d2b10;
+  --font-headline: 'Playfair Display', serif;
+  --font-body: 'Libre Baskerville', serif;
+  --font-meta: 'Special Elite', cursive;
+  --grain-opacity: 0.09;
+  --column-count: 3;
+  --clipping-shadow: 2px 3px 8px rgba(0, 0, 0, 0.25);
+}
+
+// --- 1960s–70s: classic broadsheet ---
+.era-1962, .era-1966, .era-1970, .era-1974, .era-1978 {
+  --paper-bg: #f5ead6;
+  --paper-filter: sepia(0.5) contrast(1.05);
+  --ink-color: #1a1008;
+  --ink-secondary: #4a3a20;
+  --accent-color: #1a1008;
+  --border-style: 2px solid #4a3a20;
+  --font-headline: 'Playfair Display', serif;
+  --font-body: 'Libre Baskerville', serif;
+  --font-meta: 'Special Elite', cursive;
+  --grain-opacity: 0.06;
+  --column-count: 4;
+  --clipping-shadow: 2px 3px 8px rgba(0, 0, 0, 0.2);
+}
+
+// --- 1980s–90s: colorful tabloid ---
+.era-1982, .era-1986, .era-1990, .era-1994, .era-1998 {
+  --paper-bg: #faf4e8;
+  --paper-filter: sepia(0.25) brightness(0.97);
+  --ink-color: #1a1208;
+  --ink-secondary: #555;
+  --accent-color: #c0392b;
+  --border-style: 2px solid #888;
+  --font-headline: 'Playfair Display', serif;
+  --font-body: 'Libre Baskerville', serif;
+  --font-meta: 'Special Elite', cursive;
+  --grain-opacity: 0.03;
+  --column-count: 4;
+  --clipping-shadow: 2px 3px 8px rgba(0, 0, 0, 0.18);
+}
+
+// --- 2000s+: modern archive ---
+.era-2002, .era-2006, .era-2010, .era-2014, .era-2018, .era-2022 {
+  --paper-bg: #fffdf8;
+  --paper-filter: sepia(0.08) brightness(1.0);
+  --ink-color: #1a1a1a;
+  --ink-secondary: #666;
+  --accent-color: #1a5276;
+  --border-style: 1px solid #ccc;
+  --font-headline: 'Playfair Display', serif;
+  --font-body: 'Libre Baskerville', serif;
+  --font-meta: 'Special Elite', cursive;
+  --grain-opacity: 0.01;
+  --column-count: 3;
+  --clipping-shadow: 2px 3px 8px rgba(0, 0, 0, 0.15);
+}
+
+// --- 2026 LIVE module: fresh newspaper ink ---
+.era-2026 {
+  --paper-bg: #ffffff;
+  --paper-filter: none;
+  --ink-color: #0a0a0a;
+  --ink-secondary: #444;
+  --accent-color: #c0392b;
+  --border-style: 1px solid #ddd;
+  --font-headline: 'Playfair Display', serif;
+  --font-body: 'Libre Baskerville', serif;
+  --font-meta: 'Special Elite', cursive;
+  --grain-opacity: 0;
+  --column-count: 3;
+  --clipping-shadow: 2px 3px 8px rgba(0, 0, 0, 0.12);
+}
+
+// Default fallback (no era class applied)
+:root {
+  --paper-bg: #faf4e8;
+  --paper-filter: sepia(0.1);
+  --ink-color: #1a1208;
+  --ink-secondary: #555;
+  --accent-color: #c0392b;
+  --border-style: 1px solid #ccc;
+  --font-headline: 'Playfair Display', serif;
+  --font-body: 'Libre Baskerville', serif;
+  --font-meta: 'Special Elite', cursive;
+  --grain-opacity: 0.02;
+  --column-count: 3;
+  --clipping-shadow: 2px 3px 8px rgba(0, 0, 0, 0.2);
+}

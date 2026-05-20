@@ -1,0 +1,67 @@
+{
+  "nav": {
+    "home": "Inicio",
+    "archive": "Archivo",
+    "worldCup2026": "Copa del Mundo 2026",
+    "players": "Jugadores",
+    "language": "Idioma"
+  },
+  "masthead": {
+    "subtitle": "Una Historia Completa de las Copas del Mundo de la FIFA",
+    "edition": "Edición Nº {{number}}"
+  },
+  "home": {
+    "title": "The World Cup Chronicle",
+    "editorDesk": "El Escritorio del Editor",
+    "allTournaments": "Todos los Torneos",
+    "selectTournament": "Selecciona un Torneo"
+  },
+  "tournament": {
+    "champion": "Campeón",
+    "runnerUp": "Subcampeón",
+    "thirdPlace": "Tercer Lugar",
+    "topScorer": "Máximo Goleador",
+    "goals": "{{count}} goles marcados",
+    "teams": "{{count}} equipos",
+    "pageTitle": "Copa del Mundo {{year}} — The World Cup Chronicle",
+    "clippings": "Del Archivo",
+    "hostCountry": "País Anfitrión"
+  },
+  "player": {
+    "yearsActive": "Años Activo",
+    "goals": "Goles en Copa del Mundo",
+    "tournaments": "Torneos",
+    "pageTitle": "{{name}} — The World Cup Chronicle"
+  },
+  "moment": {
+    "minute": "Minuto {{min}}",
+    "pageTitle": "{{name}} — The World Cup Chronicle",
+    "perspectives": "La Prensa"
+  },
+  "archive": {
+    "title": "El Archivo",
+    "search": "Buscar en el archivo…",
+    "searchButton": "Buscar",
+    "noResults": "No se encontraron recortes para \"{{query}}\""
+  },
+  "2026": {
+    "breaking": "ÚLTIMA HORA",
+    "live": "EN VIVO",
+    "lastUpdated": "Actualizado hace {{time}} min",
+    "results": "Resultados",
+    "standings": "Clasificación de Grupos",
+    "bracket": "Cuadro Eliminatorio",
+    "topScorers": "Máximos Goleadores",
+    "noScores": "Resultados no disponibles — vuelve pronto",
+    "specialEdition": "Edición Especial 2026",
+    "hosts": "EE. UU. · Canadá · México · Junio–Julio 2026"
+  },
+  "errors": {
+    "archiveUnavailable": "Archivo Temporalmente No Disponible",
+    "archiveUnavailableBody": "Nuestros corresponsales trabajan para restaurar el archivo. Por favor, vuelve pronto.",
+    "notFound": "Página No Encontrada",
+    "notFoundBody": "Esta página parece haberse perdido en el archivo. Quizás fue archivada bajo el año incorrecto.",
+    "serverError": "Error de Imprenta",
+    "serverErrorBody": "Nuestra imprenta ha encontrado un fallo mecánico. Nuestros ingenieros han sido notificados."
+  }
+}

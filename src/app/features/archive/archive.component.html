@@ -1,0 +1,41 @@
+<div class="newspaper-page">
+  <div class="page-container">
+    <app-masthead />
+
+    <section class="archive">
+      <h1 class="archive__title">{{ 'archive.title' | translate }}</h1>
+      <hr class="rule rule--double" />
+
+      <form class="archive__search" (ngSubmit)="search()" role="search">
+        <input
+          class="archive__input"
+          type="search"
+          [placeholder]="'archive.search' | translate"
+          [(ngModel)]="query"
+          name="query"
+          aria-label="Search the archive" />
+        <button class="archive__btn" type="submit" [disabled]="searching()">
+          @if (searching()) {
+            <span class="typewriter-text">…</span>
+          } @else {
+            {{ 'archive.searchButton' | translate }}
+          }
+        </button>
+      </form>
+
+      @if (searched()) {
+        @if (results().length) {
+          <div class="columns-grid" style="margin-top: 2rem;">
+            @for (clipping of results(); track clipping.id) {
+              <app-newspaper-clipping [clipping]="clipping" />
+            }
+          </div>
+        } @else {
+          <p class="archive__no-results">
+            {{ 'archive.noResults' | translate: { query: query() } }}
+          </p>
+        }
+      }
+    </section>
+  </div>
+</div>

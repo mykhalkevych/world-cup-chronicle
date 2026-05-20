@@ -1,0 +1,75 @@
+.masthead {
+  padding: 1rem 0 0.5rem;
+  text-align: center;
+
+  &__nav-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.75rem;
+    padding: 0 0.5rem;
+
+    nav {
+      display: flex;
+      gap: 1.5rem;
+
+      a {
+        font-family: var(--font-meta);
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        text-decoration: none;
+        color: var(--ink-secondary);
+
+        &:hover {
+          color: var(--accent-color);
+        }
+      }
+    }
+  }
+
+  &__live-link {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  &__name-link {
+    text-decoration: none;
+    display: block;
+  }
+
+  &__name {
+    font-family: var(--font-headline);
+    font-size: clamp(2rem, 6vw, 4rem);
+    font-weight: 900;
+    letter-spacing: -0.01em;
+    line-height: 1;
+    color: var(--ink-color);
+    margin-bottom: 0.25rem;
+  }
+
+  &__edition {
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 0.25rem;
+  }
+
+  &__subtitle {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    margin-bottom: 0.75rem;
+  }
+
+  &--live &__name {
+    letter-spacing: 0.02em;
+  }
+
+  .rule {
+    &--double {
+      margin-bottom: 0.5rem;
+    }
+  }
+}

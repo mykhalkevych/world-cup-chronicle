@@ -1,0 +1,37 @@
+.moment-page {
+  padding: 2rem 0 4rem;
+
+  &__header {
+    margin-bottom: 1rem;
+  }
+
+  &__title {
+    font-family: var(--font-headline);
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 900;
+    line-height: 1.1;
+    margin-top: 0.25rem;
+  }
+
+  &__description {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    line-height: 1.75;
+    max-width: 72ch;
+    margin: 1.5rem 0;
+    font-style: italic;
+  }
+
+  &__perspectives {
+    margin-top: 2rem;
+  }
+}
+
+.section-heading {
+  font-family: var(--font-headline);
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--ink-secondary);
+  margin-bottom: 1rem;
+}

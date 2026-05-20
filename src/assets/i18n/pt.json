@@ -1,0 +1,67 @@
+{
+  "nav": {
+    "home": "Início",
+    "archive": "Arquivo",
+    "worldCup2026": "Copa do Mundo 2026",
+    "players": "Jogadores",
+    "language": "Idioma"
+  },
+  "masthead": {
+    "subtitle": "Uma História Completa das Copas do Mundo da FIFA",
+    "edition": "Edição Nº {{number}}"
+  },
+  "home": {
+    "title": "The World Cup Chronicle",
+    "editorDesk": "A Mesa do Editor",
+    "allTournaments": "Todos os Torneios",
+    "selectTournament": "Selecione um Torneio"
+  },
+  "tournament": {
+    "champion": "Campeão",
+    "runnerUp": "Vice-Campeão",
+    "thirdPlace": "Terceiro Lugar",
+    "topScorer": "Artilheiro",
+    "goals": "{{count}} gols marcados",
+    "teams": "{{count}} equipes",
+    "pageTitle": "Copa do Mundo {{year}} — The World Cup Chronicle",
+    "clippings": "Do Arquivo",
+    "hostCountry": "País Sede"
+  },
+  "player": {
+    "yearsActive": "Anos Ativo",
+    "goals": "Gols na Copa do Mundo",
+    "tournaments": "Torneios",
+    "pageTitle": "{{name}} — The World Cup Chronicle"
+  },
+  "moment": {
+    "minute": "Minuto {{min}}",
+    "pageTitle": "{{name}} — The World Cup Chronicle",
+    "perspectives": "A Imprensa"
+  },
+  "archive": {
+    "title": "O Arquivo",
+    "search": "Pesquisar no arquivo…",
+    "searchButton": "Pesquisar",
+    "noResults": "Nenhum recorte encontrado para \"{{query}}\""
+  },
+  "2026": {
+    "breaking": "URGENTE",
+    "live": "AO VIVO",
+    "lastUpdated": "Atualizado há {{time}} min",
+    "results": "Resultados",
+    "standings": "Classificação dos Grupos",
+    "bracket": "Chaveamento",
+    "topScorers": "Artilheiros",
+    "noScores": "Resultados indisponíveis — volte em breve",
+    "specialEdition": "Edição Especial 2026",
+    "hosts": "EUA · Canadá · México · Junho–Julho 2026"
+  },
+  "errors": {
+    "archiveUnavailable": "Arquivo Temporariamente Indisponível",
+    "archiveUnavailableBody": "Nossos correspondentes trabalham para restaurar o arquivo. Por favor, volte em breve.",
+    "notFound": "Página Não Encontrada",
+    "notFoundBody": "Esta página parece ter se perdido no arquivo. Talvez tenha sido arquivada no ano errado.",
+    "serverError": "Erro na Gráfica",
+    "serverErrorBody": "Nossa gráfica encontrou uma falha mecânica. Nossos engenheiros foram notificados."
+  }
+}

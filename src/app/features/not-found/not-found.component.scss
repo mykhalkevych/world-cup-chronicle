@@ -1,0 +1,46 @@
+.correction-notice {
+  max-width: 600px;
+  margin: 4rem auto;
+  padding: 2rem;
+  border: var(--border-style);
+  background: var(--paper-bg);
+  box-shadow: var(--clipping-shadow);
+  text-align: center;
+
+  &__label {
+    font-family: var(--font-meta);
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent-color);
+    margin-bottom: 1rem;
+    border: 1px solid var(--accent-color);
+    display: inline-block;
+    padding: 0.2rem 0.75rem;
+  }
+
+  &__headline {
+    font-family: var(--font-headline);
+    font-size: 2.5rem;
+    font-weight: 900;
+    margin-bottom: 1rem;
+  }
+
+  &__body {
+    font-family: var(--font-body);
+    font-style: italic;
+    color: var(--ink-secondary);
+    margin: 1rem 0;
+    line-height: 1.7;
+  }
+
+  &__action {
+    margin-top: 1.5rem;
+    font-family: var(--font-meta);
+    font-size: 0.85rem;
+
+    a {
+      color: var(--ink-color);
+    }
+  }
+}

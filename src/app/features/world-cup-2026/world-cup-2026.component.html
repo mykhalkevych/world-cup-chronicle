@@ -1,0 +1,87 @@
+<div class="newspaper-page era-2026">
+  <div class="page-container">
+    <app-masthead
+      name="The World Cup Chronicle"
+      [subtitle]="'2026.specialEdition' | translate"
+      [isLive]="true" />
+
+    <!-- Live ticker -->
+    <div class="live-ticker" role="marquee" aria-label="Breaking news ticker">
+      <span class="live-ticker__label">
+        <span class="breaking-badge">{{ '2026.live' | translate }}</span>
+      </span>
+      <div class="live-ticker__track">
+        <span class="ticker-scroll" (click)="onTickerClick()">
+          @for (headline of tickerHeadlines(); track headline) {
+            <span class="live-ticker__item">{{ headline }}</span>
+            <span class="live-ticker__sep" aria-hidden="true">·</span>
+          }
+        </span>
+      </div>
+    </div>
+
+    <hr class="rule rule--double" />
+
+    <!-- Top story placeholder -->
+    <section class="front-page" aria-label="Front page">
+      <article class="clipping clipping--featured front-page__feature">
+        <h2 class="clipping__headline" style="font-size: 2.5rem;">
+          The World Cup Returns: 48 Teams, Three Nations, One Champion
+        </h2>
+        <p class="clipping__deck">
+          The most ambitious tournament in FIFA history kicks off across the United States,
+          Canada and Mexico — follow every group stage match, knockout tie and golden boot race
+          right here as it happens.
+        </p>
+        <div class="clipping__body">
+          <p>
+            The 2026 FIFA World Cup marks a historic milestone — the first tournament to feature
+            48 nations competing across three host countries. With expanded group stages, new
+            knockout formats, and a record prize fund, this summer promises to be the grandest
+            spectacle the beautiful game has ever produced.
+          </p>
+        </div>
+        <footer class="clipping__footer">
+          <span class="byline source">The World Cup Chronicle · June 2026</span>
+          <span class="breaking-badge">{{ '2026.breaking' | translate }}</span>
+        </footer>
+      </article>
+    </section>
+
+    <hr class="rule" />
+
+    <!-- Results section -->
+    <section class="results-section" aria-label="Match results">
+      <h2 class="section-heading">{{ '2026.results' | translate }}</h2>
+      <div class="results-grid">
+        <app-score-box homeTeam="USA" awayTeam="MEX" score="2 : 0" />
+        <app-score-box homeTeam="BRA" awayTeam="ARG" score="1 : 1" />
+        <app-score-box homeTeam="ENG" awayTeam="FRA" score="0 : 1" />
+        <app-score-box homeTeam="GER" awayTeam="ESP" score="2 : 2" />
+      </div>
+      <p class="results-section__note byline">
+        {{ '2026.lastUpdated' | translate: { time: 5 } }}
+      </p>
+    </section>
+
+    <hr class="rule" />
+
+    <!-- Standings placeholder -->
+    <section aria-label="Group standings">
+      <h2 class="section-heading">{{ '2026.standings' | translate }}</h2>
+      <p class="byline" style="padding: 1rem 0;">
+        Group standings will appear here once the tournament begins.
+      </p>
+    </section>
+
+    <hr class="rule" />
+
+    <!-- Top scorers placeholder -->
+    <section aria-label="Top scorers">
+      <h2 class="section-heading">{{ '2026.topScorers' | translate }}</h2>
+      <p class="byline" style="padding: 1rem 0;">
+        Golden boot leaderboard will update throughout the tournament.
+      </p>
+    </section>
+  </div>
+</div>

@@ -1,0 +1,73 @@
+.live-ticker {
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  border-top: 2px solid var(--accent-color);
+  border-bottom: 2px solid var(--accent-color);
+  padding: 0.4rem 0;
+  margin: 0.5rem 0;
+
+  &__label {
+    flex-shrink: 0;
+    padding-right: 1rem;
+    border-right: 1px solid color-mix(in srgb, var(--accent-color) 40%, transparent);
+    margin-right: 1rem;
+  }
+
+  &__track {
+    flex: 1;
+    overflow: hidden;
+    cursor: pointer;
+  }
+
+  &__item {
+    font-family: var(--font-meta);
+    font-size: 0.8rem;
+    color: var(--ink-color);
+    padding: 0 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  &__sep {
+    color: var(--accent-color);
+    font-weight: 900;
+  }
+}
+
+.front-page {
+  margin: 1.5rem 0;
+
+  &__feature {
+    transform: none !important;
+
+    &:hover {
+      transform: scale(1.01) translateY(-2px) !important;
+    }
+  }
+}
+
+.results-section {
+  padding: 1rem 0;
+
+  &__note {
+    margin-top: 0.75rem;
+    font-size: 0.7rem;
+  }
+}
+
+.results-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.section-heading {
+  font-family: var(--font-headline);
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--ink-secondary);
+  margin-bottom: 0.75rem;
+}
