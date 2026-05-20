@@ -4,7 +4,6 @@ import { TranslatePipe } from '@ngx-translate/core';
 import { MastheadComponent } from '../../shared/components/masthead/masthead.component';
 import { ScoreBoxComponent } from '../../shared/components/score-box/score-box.component';
 import { EraThemeService } from '../../core/services/era-theme.service';
-import { AnalyticsService } from '../../core/services/analytics.service';
 import { NewsArticle } from '../../core/models/news-article.model';
 
 @Component({
@@ -17,7 +16,6 @@ import { NewsArticle } from '../../core/models/news-article.model';
 })
 export class WorldCup2026Component implements OnInit, OnDestroy {
   private eraTheme = inject(EraThemeService);
-  private analytics = inject(AnalyticsService);
   private titleService = inject(Title);
 
   articles = signal<NewsArticle[]>([]);
@@ -39,7 +37,5 @@ export class WorldCup2026Component implements OnInit, OnDestroy {
     this.eraTheme.clearEra();
   }
 
-  onTickerClick(): void {
-    this.analytics.trackEvent('2026-ticker-click');
-  }
+  onTickerClick(): void {}
 }

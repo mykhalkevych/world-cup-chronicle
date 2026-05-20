@@ -7,7 +7,6 @@ import { TranslatePipe } from '@ngx-translate/core';
 import { MastheadComponent } from '../../shared/components/masthead/masthead.component';
 import { NewspaperClippingComponent } from '../../shared/components/newspaper-clipping/newspaper-clipping.component';
 import { NotionService } from '../../core/services/notion.service';
-import { AnalyticsService } from '../../core/services/analytics.service';
 import { Clipping } from '../../core/models/clipping.model';
 
 @Component({
@@ -20,7 +19,6 @@ import { Clipping } from '../../core/models/clipping.model';
 })
 export class ArchiveComponent {
   private notion = inject(NotionService);
-  private analytics = inject(AnalyticsService);
   private titleService = inject(Title);
 
   query = signal('');
@@ -37,8 +35,6 @@ export class ArchiveComponent {
     if (!q.trim()) return;
 
     this.searching.set(true);
-    this.analytics.trackEvent('archive-search', { query: q });
-
     const clippings = await this.notion.searchClippings(q);
     this.results.set(clippings);
     this.searching.set(false);

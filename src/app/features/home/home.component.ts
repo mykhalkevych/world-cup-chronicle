@@ -3,7 +3,6 @@ import { RouterLink } from '@angular/router';
 import { Title, Meta } from '@angular/platform-browser';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { MastheadComponent } from '../../shared/components/masthead/masthead.component';
-import { AnalyticsService } from '../../core/services/analytics.service';
 import { EraThemeService } from '../../core/services/era-theme.service';
 
 interface TournamentEntry {
@@ -24,7 +23,6 @@ export class HomeComponent implements OnInit {
   private titleService = inject(Title);
   private meta = inject(Meta);
   private translate = inject(TranslateService);
-  private analytics = inject(AnalyticsService);
   private eraTheme = inject(EraThemeService);
 
   readonly era1930s: TournamentEntry[] = [
@@ -75,7 +73,5 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  onTournamentOpen(year: number): void {
-    this.analytics.trackEvent('tournament-open', { year });
-  }
+  onTournamentOpen(_year: number): void {}
 }
