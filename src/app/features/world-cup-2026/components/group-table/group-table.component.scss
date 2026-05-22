@@ -1,0 +1,68 @@
+.standings-wrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.group-block {
+  &__title {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-bottom: 0.5rem;
+    border-bottom: 1px solid color-mix(in srgb, var(--ink-color) 20%, transparent);
+    padding-bottom: 0.25rem;
+  }
+}
+
+.standings-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8rem;
+
+  th, td {
+    padding: 0.3rem 0.4rem;
+    text-align: center;
+  }
+
+  th {
+    font-family: var(--font-meta);
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--ink-secondary);
+    border-bottom: 1px solid color-mix(in srgb, var(--ink-color) 20%, transparent);
+  }
+
+  .col-team {
+    text-align: left;
+    font-family: var(--font-body);
+  }
+
+  .col-rank {
+    color: var(--ink-secondary);
+    font-size: 0.7rem;
+  }
+
+  .col-pts {
+    font-family: var(--font-headline);
+    font-weight: 700;
+  }
+
+  tbody tr {
+    border-bottom: 1px solid color-mix(in srgb, var(--ink-color) 8%, transparent);
+
+    &.qualified {
+      background: color-mix(in srgb, var(--accent-color) 6%, transparent);
+    }
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+}
+
+.no-data {
+  padding: 1rem 0;
+}

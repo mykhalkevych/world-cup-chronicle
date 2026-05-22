@@ -6,10 +6,85 @@ import {
 } from '@angular/ssr/node';
 import express from 'express';
 import { join } from 'node:path';
+import https from 'node:https';
+import http from 'node:http';
 // Load .env for local development (no-op in production where .env doesn't exist)
 import 'dotenv/config';
 
 const browserDistFolder = join(import.meta.dirname, '../browser');
+
+// ── 2026 in-memory cache ──────────────────────────────────────────────────────
+const cache2026 = new Map<string, { data: unknown; ts: number }>();
+
+function get2026Cache<T>(key: string, ttlMs: number): T | null {
+  const entry = cache2026.get(key);
+  if (!entry || Date.now() - entry.ts > ttlMs) return null;
+  return entry.data as T;
+}
+
+function set2026Cache(key: string, data: unknown): void {
+  cache2026.set(key, { data, ts: Date.now() });
+}
+
+// ── HTTP/S fetch helper with redirect support ─────────────────────────────────
+function fetchUrl(url: string, depth = 0): Promise<string> {
+  return new Promise((resolve, reject) => {
+    if (depth > 3) { reject(new Error('Too many redirects')); return; }
+    const lib = url.startsWith('https') ? https : http;
+    const req = lib.get(url, { headers: { 'User-Agent': 'WorldCupChronicle/1.0' } }, (res) => {
+      if (res.statusCode && res.statusCode >= 300 && res.statusCode < 400 && res.headers.location) {
+        resolve(fetchUrl(res.headers.location, depth + 1));
+        return;
+      }
+      const chunks: Buffer[] = [];
+      res.on('data', (c: Buffer) => chunks.push(c));
+      res.on('end', () => resolve(Buffer.concat(chunks).toString('utf8')));
+      res.on('error', reject);
+    });
+    req.setTimeout(8000, () => { req.destroy(); reject(new Error('Timeout')); });
+    req.on('error', reject);
+  });
+}
+
+// ── RSS parser ────────────────────────────────────────────────────────────────
+import type { NewsArticle } from './app/core/models/news-article.model';
+
+function parseRss(xml: string, sourceName: string): NewsArticle[] {
+  const items = xml.match(/<item[\s\S]*?<\/item>/g) ?? [];
+  return items.slice(0, 20).map((item, i) => {
+    const title   = (item.match(/<title><!\[CDATA\[([\s\S]*?)\]\]><\/title>/) ?? item.match(/<title>([\s\S]*?)<\/title>/))?.[1]?.trim() ?? '';
+    const desc    = (item.match(/<description><!\[CDATA\[([\s\S]*?)\]\]><\/description>/) ?? item.match(/<description>([\s\S]*?)<\/description>/))?.[1]?.trim() ?? '';
+    const link    = item.match(/<link>([\s\S]*?)<\/link>/)?.[1]?.trim() ?? '';
+    const pubDate = item.match(/<pubDate>([\s\S]*?)<\/pubDate>/)?.[1]?.trim() ?? '';
+    const plain   = desc.replace(/<[^>]+>/g, '').slice(0, 400);
+    return {
+      id: `rss-${i}-${Date.now()}`,
+      headline: title,
+      deck: plain.slice(0, 120),
+      source: `${sourceName} · ${pubDate ? new Date(pubDate).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' }) : ''}`,
+      sourceCountry: 'INT',
+      body: plain,
+      url: link,
+      publishedAt: pubDate ? new Date(pubDate) : new Date(),
+      isBreaking: false,
+      tags: ['news'],
+      size: i === 0 ? 'featured' : i < 3 ? 'wide' : 'medium',
+    } satisfies NewsArticle;
+  });
+}
+
+// ── API-Football helper ───────────────────────────────────────────────────────
+async function fetchApiFootball(path: string): Promise<unknown> {
+  const key = process.env['API_FOOTBALL_KEY'];
+  if (!key) return null;
+  const url = `https://v3.football.api-sports.io${path}`;
+  try {
+    const raw = await fetchUrl(url + (url.includes('?') ? '&' : '?') + `x-apisports-key=${key}`);
+    return JSON.parse(raw);
+  } catch {
+    return null;
+  }
+}
 
 import { Client as NotionClient } from '@notionhq/client';
 
@@ -168,6 +243,73 @@ app.get('/api/search', async (req, res) => {
   } catch (err) {
     console.error('[API] /api/search', err);
     res.status(500).json([]);
+  }
+});
+
+// ── 2026 Live API endpoints ───────────────────────────────────────────────────
+const TTL_NEWS     = 15 * 60 * 1000;
+const TTL_LIVE     =  5 * 60 * 1000;
+const TTL_STANDING = 30 * 60 * 1000;
+
+app.get('/api/2026/news', async (_req, res) => {
+  const cached = get2026Cache<NewsArticle[]>('2026-news', TTL_NEWS);
+  if (cached) { res.json(cached); return; }
+  try {
+    const feeds = [
+      { url: 'https://feeds.bbci.co.uk/sport/football/rss.xml',      name: 'BBC Sport' },
+      { url: 'https://www.espn.com/espn/rss/soccer/news',             name: 'ESPN FC' },
+    ];
+    const results = await Promise.allSettled(feeds.map(f => fetchUrl(f.url).then(xml => parseRss(xml, f.name))));
+    const articles: NewsArticle[] = results
+      .flatMap(r => r.status === 'fulfilled' ? r.value : [])
+      .sort((a, b) => b.publishedAt.getTime() - a.publishedAt.getTime());
+    set2026Cache('2026-news', articles);
+    res.json(articles);
+  } catch (err) {
+    console.error('[API] /api/2026/news', err);
+    res.json([]);
+  }
+});
+
+app.get('/api/2026/fixtures', async (_req, res) => {
+  const cached = get2026Cache<unknown>('2026-fixtures', TTL_LIVE);
+  if (cached) { res.json(cached); return; }
+  try {
+    const data = await fetchApiFootball('/fixtures?league=1&season=2026');
+    const fixtures = data ?? [];
+    set2026Cache('2026-fixtures', fixtures);
+    res.json(fixtures);
+  } catch (err) {
+    console.error('[API] /api/2026/fixtures', err);
+    res.json([]);
+  }
+});
+
+app.get('/api/2026/standings', async (_req, res) => {
+  const cached = get2026Cache<unknown>('2026-standings', TTL_STANDING);
+  if (cached) { res.json(cached); return; }
+  try {
+    const data = await fetchApiFootball('/standings?league=1&season=2026');
+    const standings = data ?? [];
+    set2026Cache('2026-standings', standings);
+    res.json(standings);
+  } catch (err) {
+    console.error('[API] /api/2026/standings', err);
+    res.json([]);
+  }
+});
+
+app.get('/api/2026/scorers', async (_req, res) => {
+  const cached = get2026Cache<unknown>('2026-scorers', TTL_STANDING);
+  if (cached) { res.json(cached); return; }
+  try {
+    const data = await fetchApiFootball('/players/topscorers?league=1&season=2026');
+    const scorers = data ?? [];
+    set2026Cache('2026-scorers', scorers);
+    res.json(scorers);
+  } catch (err) {
+    console.error('[API] /api/2026/scorers', err);
+    res.json([]);
   }
 });
 
