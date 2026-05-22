@@ -1,0 +1,26 @@
+@if (scorers().length) {
+  <table class="scorers-table" role="table" aria-label="Top scorers">
+    <thead>
+      <tr>
+        <th class="col-rank">#</th>
+        <th class="col-name">Player</th>
+        <th class="col-team">Team</th>
+        <th class="col-num" title="Goals">G</th>
+        <th class="col-num" title="Assists">A</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (scorer of scorers(); track scorer.name) {
+        <tr>
+          <td class="col-rank">{{ scorer.rank }}</td>
+          <td class="col-name">{{ scorer.name }}</td>
+          <td class="col-team byline">{{ scorer.team }}</td>
+          <td class="col-num col-goals">{{ scorer.goals }}</td>
+          <td class="col-num">{{ scorer.assists }}</td>
+        </tr>
+      }
+    </tbody>
+  </table>
+} @else {
+  <p class="byline no-data">{{ '2026.noScorers' | translate }}</p>
+}

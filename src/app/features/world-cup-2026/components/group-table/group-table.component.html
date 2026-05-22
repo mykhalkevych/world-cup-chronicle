@@ -1,0 +1,39 @@
+@if (standings().length) {
+  <div class="standings-wrapper">
+    @for (group of standings(); track group.group) {
+      <div class="group-block">
+        <h3 class="group-block__title byline">{{ group.group }}</h3>
+        <table class="standings-table" role="table" [attr.aria-label]="group.group + ' standings'">
+          <thead>
+            <tr>
+              <th class="col-rank">#</th>
+              <th class="col-team">Team</th>
+              <th class="col-num" title="Played">P</th>
+              <th class="col-num" title="Won">W</th>
+              <th class="col-num" title="Drawn">D</th>
+              <th class="col-num" title="Lost">L</th>
+              <th class="col-num" title="Goal Difference">GD</th>
+              <th class="col-num col-pts" title="Points">Pts</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (team of group.teams; track team.team) {
+              <tr [class.qualified]="team.rank <= 2">
+                <td class="col-rank">{{ team.rank }}</td>
+                <td class="col-team">{{ team.team }}</td>
+                <td class="col-num">{{ team.played }}</td>
+                <td class="col-num">{{ team.won }}</td>
+                <td class="col-num">{{ team.drawn }}</td>
+                <td class="col-num">{{ team.lost }}</td>
+                <td class="col-num">{{ team.goalDiff > 0 ? '+' : '' }}{{ team.goalDiff }}</td>
+                <td class="col-num col-pts">{{ team.points }}</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    }
+  </div>
+} @else {
+  <p class="byline no-data">{{ '2026.noStandings' | translate }}</p>
+}

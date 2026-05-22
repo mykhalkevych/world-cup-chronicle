@@ -54,6 +54,8 @@
     "bracket": "Knockout Bracket",
     "topScorers": "Top Scorers",
     "noScores": "Scores unavailable — check back soon",
+    "noStandings": "Group standings will appear once the tournament begins.",
+    "noScorers": "Golden boot leaderboard will update throughout the tournament.",
     "specialEdition": "2026 Special Edition",
     "hosts": "USA · Canada · Mexico · June–July 2026"
   },

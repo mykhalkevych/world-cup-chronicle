@@ -1,0 +1,59 @@
+.scorers-table {
+  width: 100%;
+  max-width: 560px;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+  margin-top: 1rem;
+
+  th, td {
+    padding: 0.35rem 0.5rem;
+    text-align: left;
+  }
+
+  th {
+    font-family: var(--font-meta);
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--ink-secondary);
+    border-bottom: 2px solid color-mix(in srgb, var(--ink-color) 30%, transparent);
+  }
+
+  .col-rank {
+    width: 2rem;
+    text-align: center;
+    color: var(--ink-secondary);
+  }
+
+  .col-num {
+    width: 2.5rem;
+    text-align: center;
+  }
+
+  .col-goals {
+    font-family: var(--font-headline);
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--accent-color);
+  }
+
+  .col-team {
+    font-size: 0.72rem;
+  }
+
+  tbody tr {
+    border-bottom: 1px solid color-mix(in srgb, var(--ink-color) 10%, transparent);
+
+    &:first-child td {
+      padding-top: 0.6rem;
+    }
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+}
+
+.no-data {
+  padding: 1rem 0;
+}

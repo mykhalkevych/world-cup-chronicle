@@ -1,0 +1,26 @@
+<div class="results-grid">
+  @for (result of results(); track result.id) {
+    <div class="score-card" [class.score-card--live]="isLive(result)">
+      @if (isLive(result)) {
+        <span class="live-badge">{{ '2026.live' | translate }}</span>
+      }
+      <div class="score-card__teams">
+        <span class="score-card__team">{{ result.homeTeam }}</span>
+        <span class="score-card__score">{{ formatScore(result) }}</span>
+        <span class="score-card__team score-card__team--away">{{ result.awayTeam }}</span>
+      </div>
+      <div class="score-card__meta byline">
+        {{ result.round }}
+        @if (result.minute) {
+          · {{ result.minute }}'
+        }
+      </div>
+    </div>
+  }
+  @if (!results().length) {
+    <p class="byline no-data">{{ '2026.noScores' | translate }}</p>
+  }
+</div>
+@if (results().length && lastUpdatedMin()) {
+  <p class="results-note byline">{{ '2026.lastUpdated' | translate: { time: lastUpdatedMin() } }}</p>
+}
