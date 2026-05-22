@@ -8,12 +8,12 @@ runConfig:
 
 env:
   - variable: NOTION_TOKEN
-    secret: NOTION_TOKEN
+    secret: NOTION_TOKEN@latest
   - variable: NOTION_TOURNAMENTS_DB
-    secret: NOTION_TOURNAMENTS_DB
+    secret: NOTION_TOURNAMENTS_DB@latest
   - variable: NOTION_CLIPPINGS_DB
-    secret: NOTION_CLIPPINGS_DB
+    secret: NOTION_CLIPPINGS_DB@latest
   - variable: NOTION_PLAYERS_DB
-    secret: NOTION_PLAYERS_DB
+    secret: NOTION_PLAYERS_DB@latest
   - variable: NOTION_MOMENTS_DB
-    secret: NOTION_MOMENTS_DB
+    secret: NOTION_MOMENTS_DB@latest
