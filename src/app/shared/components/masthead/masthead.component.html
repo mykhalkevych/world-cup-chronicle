@@ -12,7 +12,16 @@
         {{ 'nav.worldCup2026' | translate }}
       </a>
     </nav>
-    <app-locale-switcher />
+    <div class="masthead__controls">
+      <app-locale-switcher />
+      <button
+        class="sound-toggle"
+        (click)="toggleSound()"
+        [attr.aria-label]="soundEnabled() ? ('nav.soundOff' | translate) : ('nav.soundOn' | translate)"
+        [attr.aria-pressed]="soundEnabled()">
+        {{ soundEnabled() ? '♪' : '♩' }}
+      </button>
+    </div>
   </div>
 
   <div class="masthead__title-row">

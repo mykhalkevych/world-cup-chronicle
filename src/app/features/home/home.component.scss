@@ -61,6 +61,16 @@
     flex-wrap: wrap;
     gap: 0.75rem;
   }
+
+  @media (max-width: 480px) {
+    padding: 1rem 0 0.75rem;
+
+    &__header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.25rem;
+    }
+  }
 }
 
 .tournament-card {
@@ -70,10 +80,15 @@
   text-decoration: none;
   border: 1px solid color-mix(in srgb, var(--ink-color) 25%, transparent);
   padding: 0.75rem 1rem;
-  min-width: 120px;
+  min-width: 110px;
   background: color-mix(in srgb, var(--paper-bg) 70%, white);
   transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
   color: var(--ink-color);
+
+  @media (max-width: 360px) {
+    min-width: 0;
+    flex: 1 1 calc(50% - 0.75rem);
+  }
 
   &:hover {
     transform: translateY(-3px);

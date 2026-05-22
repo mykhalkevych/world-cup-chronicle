@@ -46,6 +46,13 @@
   }
 }
 
+.tournament-header__infographic {
+  margin: 1.25rem 0 0.5rem;
+  padding: 0.75rem;
+  border: 1px solid color-mix(in srgb, var(--ink-color) 15%, transparent);
+  background: color-mix(in srgb, var(--ink-color) 3%, var(--paper-bg));
+}
+
 .featured-wrapper {
   margin: 1.5rem 0;
 }

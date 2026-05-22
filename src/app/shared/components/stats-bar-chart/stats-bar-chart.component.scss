@@ -1,0 +1,80 @@
+.stats-chart {
+  margin: 0;
+  padding: 0;
+
+  &__title {
+    display: block;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 0.65rem;
+    margin-bottom: 0.75rem;
+    border-bottom: 1px solid color-mix(in srgb, var(--ink-color) 15%, transparent);
+    padding-bottom: 0.4rem;
+  }
+
+  &__bars {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  &__row {
+    display: grid;
+    grid-template-columns: 2.5rem 1fr 2.5rem;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  &__label {
+    font-family: var(--font-meta);
+    font-size: 0.65rem;
+    color: var(--ink-secondary);
+    text-align: right;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &__track {
+    height: 10px;
+    background: color-mix(in srgb, var(--ink-color) 8%, transparent);
+    position: relative;
+    overflow: hidden;
+  }
+
+  &__fill {
+    position: absolute;
+    inset: 0 auto 0 0;
+    background: color-mix(in srgb, var(--ink-color) 45%, transparent);
+    transition: width 0.6s ease;
+
+    // Newspaper halftone pattern on the fill bar
+    background-image: repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 2px,
+      color-mix(in srgb, var(--ink-color) 15%, transparent) 2px,
+      color-mix(in srgb, var(--ink-color) 15%, transparent) 4px
+    );
+    background-color: color-mix(in srgb, var(--ink-color) 40%, transparent);
+
+    &--highlight {
+      background-color: var(--ink-color);
+      background-image: none;
+    }
+  }
+
+  &__value {
+    font-family: var(--font-headline);
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--ink-color);
+    white-space: nowrap;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stats-chart__fill {
+    transition: none;
+  }
+}

@@ -8,10 +8,13 @@
     align-items: center;
     margin-bottom: 0.75rem;
     padding: 0 0.5rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
 
     nav {
       display: flex;
-      gap: 1.5rem;
+      flex-wrap: wrap;
+      gap: 1rem;
 
       a {
         font-family: var(--font-meta);
@@ -26,6 +29,23 @@
         }
       }
     }
+
+    @media (max-width: 480px) {
+      justify-content: center;
+      flex-direction: column;
+      align-items: center;
+
+      nav {
+        justify-content: center;
+        gap: 1.25rem;
+      }
+    }
+  }
+
+  &__controls {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
   }
 
   &__live-link {
@@ -66,6 +86,24 @@
   &--live &__name {
     letter-spacing: 0.02em;
   }
+
+.sound-toggle {
+  background: none;
+  border: 1px solid color-mix(in srgb, var(--ink-secondary) 40%, transparent);
+  color: var(--ink-secondary);
+  cursor: pointer;
+  font-size: 0.75rem;
+  padding: 0.15rem 0.4rem;
+  line-height: 1;
+  transition: background 0.2s, color 0.2s;
+
+  &:hover,
+  &[aria-pressed='true'] {
+    background: var(--ink-color);
+    color: var(--paper-bg);
+    border-color: var(--ink-color);
+  }
+}
 
   .rule {
     &--double {

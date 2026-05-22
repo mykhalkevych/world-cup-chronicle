@@ -4,7 +4,9 @@
     "archive": "Arquivo",
     "worldCup2026": "Copa do Mundo 2026",
     "players": "Jogadores",
-    "language": "Idioma"
+    "language": "Idioma",
+    "soundOn": "Som ativado",
+    "soundOff": "Som desativado"
   },
   "masthead": {
     "subtitle": "Uma História Completa das Copas do Mundo da FIFA",
@@ -26,7 +28,8 @@
     "pageTitle": "Copa do Mundo {{year}} — The World Cup Chronicle",
     "clippings": "Do Arquivo",
     "hostCountry": "País Sede",
-    "perspectives": "Na Imprensa"
+    "perspectives": "Na Imprensa",
+    "goalsChart": "Gols Marcados — Todas as Copas do Mundo"
   },
   "player": {
     "yearsActive": "Anos Ativo",

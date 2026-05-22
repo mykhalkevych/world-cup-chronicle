@@ -5,7 +5,11 @@
     @if (moment(); as m) {
       <article class="moment-page">
         <header class="moment-page__header">
-          <p class="byline meta">{{ 'moment.minute' | translate: { min: m.minute } }}</p>
+          <p class="byline meta">
+            <time [attr.datetime]="'PT' + m.minute + 'M'">
+              {{ 'moment.minute' | translate: { min: m.minute } }}
+            </time>
+          </p>
           <h1 class="moment-page__title">{{ m.name }}</h1>
         </header>
 
