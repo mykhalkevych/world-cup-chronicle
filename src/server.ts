@@ -6,20 +6,15 @@ import {
 } from '@angular/ssr/node';
 import express from 'express';
 import { join } from 'node:path';
-import { createRequire } from 'node:module';
-
-// Load .env synchronously so env vars are available before first SSR request
-if (process.env['NODE_ENV'] !== 'production') {
-  const require = createRequire(import.meta.url);
-  try { require('dotenv').config(); } catch { /* dotenv optional */ }
-}
+// Load .env for local development (no-op in production where .env doesn't exist)
+import 'dotenv/config';
 
 const browserDistFolder = join(import.meta.dirname, '../browser');
-const _require = createRequire(import.meta.url);
+
+import { Client as NotionClient } from '@notionhq/client';
 
 function notionClient() {
-  const { Client } = _require('@notionhq/client');
-  return new Client({ auth: process.env['NOTION_TOKEN'] });
+  return new NotionClient({ auth: process.env['NOTION_TOKEN'] });
 }
 
 function mapTournament(page: any) {
