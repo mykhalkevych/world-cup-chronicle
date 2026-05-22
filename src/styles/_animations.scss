@@ -1,11 +1,21 @@
 // Page turn, unfold, typewriter effects
 
 @media (prefers-reduced-motion: reduce) {
-  .clipping,
-  .era-transition,
-  .unfold,
-  .typewriter {
-    transition: none !important;
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .ticker-scroll {
+    animation: none !important;
+    white-space: normal;
+  }
+
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
     animation: none !important;
   }
 }

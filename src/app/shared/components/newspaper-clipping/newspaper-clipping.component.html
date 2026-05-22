@@ -4,8 +4,8 @@
   [class.clipping--wide]="clipping().size === 'wide'"
   [class.clipping--small]="clipping().size === 'small'"
   [style.transform]="rotationStyle"
-  [attr.tabindex]="0"
-  [attr.role]="'article'"
+  tabindex="0"
+  [attr.aria-label]="clipping().headline"
   (click)="clicked.emit(clipping())"
   (keydown.enter)="onEnter()">
 

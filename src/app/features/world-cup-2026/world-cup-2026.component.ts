@@ -15,12 +15,13 @@ import { FixturesService } from './services/fixtures.service';
 import { ResultsGridComponent } from './components/results-grid/results-grid.component';
 import { GroupTableComponent } from './components/group-table/group-table.component';
 import { TopScorersTableComponent } from './components/top-scorers-table/top-scorers-table.component';
+import { KnockoutBracketComponent } from './components/knockout-bracket/knockout-bracket.component';
 
 @Component({
   selector: 'app-world-cup-2026',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [TranslatePipe, MastheadComponent, ResultsGridComponent, GroupTableComponent, TopScorersTableComponent],
+  imports: [TranslatePipe, MastheadComponent, ResultsGridComponent, GroupTableComponent, TopScorersTableComponent, KnockoutBracketComponent],
   templateUrl: './world-cup-2026.component.html',
   styleUrl: './world-cup-2026.component.scss',
 })
@@ -38,6 +39,7 @@ export class WorldCup2026Component implements OnInit, OnDestroy {
     'Follow every match as it happens',
   ]);
   results = signal<MatchResult[]>([]);
+  allFixtures = signal<MatchResult[]>([]);
   standings = signal<GroupStanding[]>([]);
   scorers = signal<TopScorer[]>([]);
   lastUpdatedMin = signal<number>(0);
@@ -68,6 +70,7 @@ export class WorldCup2026Component implements OnInit, OnDestroy {
     });
 
     this.fixtures.getFixtures().subscribe(results => {
+      this.allFixtures.set(results);
       this.results.set(results.slice(0, 12));
       this.lastUpdatedMin.set(Math.floor(Math.random() * 5) + 1);
     });
