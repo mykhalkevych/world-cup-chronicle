@@ -25,7 +25,8 @@
     "teams": "{{count}} equipos",
     "pageTitle": "Copa del Mundo {{year}} — The World Cup Chronicle",
     "clippings": "Del Archivo",
-    "hostCountry": "País Anfitrión"
+    "hostCountry": "País Anfitrión",
+    "perspectives": "Desde la Prensa"
   },
   "player": {
     "yearsActive": "Años Activo",
@@ -51,8 +52,11 @@
     "results": "Resultados",
     "standings": "Clasificación de Grupos",
     "bracket": "Cuadro Eliminatorio",
+    "bracketPending": "El cuadro eliminatorio aparecerá cuando concluya la fase de grupos.",
     "topScorers": "Máximos Goleadores",
     "noScores": "Resultados no disponibles — vuelve pronto",
+    "noStandings": "La clasificación aparecerá cuando comience el torneo.",
+    "noScorers": "La tabla de goleadores se actualizará durante el torneo.",
     "specialEdition": "Edición Especial 2026",
     "hosts": "EE. UU. · Canadá · México · Junio–Julio 2026"
   },

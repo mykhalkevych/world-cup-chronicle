@@ -1,0 +1,27 @@
+@if (rounds().length) {
+  <div class="bracket" role="region" aria-label="Knockout bracket">
+    @for (round of rounds(); track round.label) {
+      <div class="bracket__round">
+        <h3 class="bracket__round-label byline">{{ round.label }}</h3>
+        <div class="bracket__matches">
+          @for (match of round.matches; track match.id) {
+            <div class="bracket-match" [class.bracket-match--live]="isLive(match)">
+              @if (isLive(match)) {
+                <span class="live-badge">{{ '2026.live' | translate }}</span>
+              }
+              <div class="bracket-match__row">
+                <span class="bracket-match__team">{{ match.homeTeam }}</span>
+                <span class="bracket-match__score">{{ formatScore(match) }}</span>
+              </div>
+              <div class="bracket-match__row bracket-match__row--away">
+                <span class="bracket-match__team">{{ match.awayTeam }}</span>
+              </div>
+            </div>
+          }
+        </div>
+      </div>
+    }
+  </div>
+} @else {
+  <p class="byline no-data">{{ '2026.bracketPending' | translate }}</p>
+}
