@@ -37,6 +37,15 @@
           <p class="tournament-header__summary">{{ t.summary }}</p>
         }
 
+        @if (goalsBars.length) {
+          <div class="tournament-header__infographic">
+            <app-stats-bar-chart
+              [bars]="goalsBars"
+              [title]="'tournament.goalsChart' | translate"
+              unit="" />
+          </div>
+        }
+
         <hr class="rule rule--double" />
       </section>
 

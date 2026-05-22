@@ -1,0 +1,26 @@
+@if (bars().length) {
+  <figure class="stats-chart" role="img" [attr.aria-label]="title()">
+    @if (title()) {
+      <figcaption class="stats-chart__title byline">{{ title() }}</figcaption>
+    }
+    <div class="stats-chart__bars" role="list">
+      @for (bar of bars(); track bar.label) {
+        <div class="stats-chart__row" role="listitem">
+          <span class="stats-chart__label">{{ bar.label }}</span>
+          <div class="stats-chart__track">
+            <div
+              class="stats-chart__fill"
+              [class.stats-chart__fill--highlight]="bar.highlight"
+              [style.width]="widthPct(bar.value)"
+              [attr.aria-valuenow]="bar.value"
+              [attr.aria-valuemin]="0"
+              [attr.aria-valuemax]="max()"
+              role="progressbar">
+            </div>
+          </div>
+          <span class="stats-chart__value">{{ bar.value }}{{ unit() }}</span>
+        </div>
+      }
+    </div>
+  </figure>
+}

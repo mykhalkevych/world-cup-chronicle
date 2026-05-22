@@ -4,7 +4,9 @@
     "archive": "Archive",
     "worldCup2026": "World Cup 2026",
     "players": "Players",
-    "language": "Language"
+    "language": "Language",
+    "soundOn": "Sound on",
+    "soundOff": "Sound off"
   },
   "masthead": {
     "subtitle": "A Complete History of FIFA World Cups",
@@ -26,7 +28,8 @@
     "pageTitle": "{{year}} FIFA World Cup — The World Cup Chronicle",
     "clippings": "From the Archive",
     "hostCountry": "Host Country",
-    "perspectives": "From the Press"
+    "perspectives": "From the Press",
+    "goalsChart": "Goals Scored — All World Cups"
   },
   "player": {
     "yearsActive": "Years Active",

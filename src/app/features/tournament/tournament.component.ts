@@ -8,6 +8,7 @@ import { PLATFORM_ID } from '@angular/core';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { MastheadComponent } from '../../shared/components/masthead/masthead.component';
 import { NewspaperClippingComponent } from '../../shared/components/newspaper-clipping/newspaper-clipping.component';
+import { StatsBarChartComponent, StatBar } from '../../shared/components/stats-bar-chart/stats-bar-chart.component';
 import { EraThemeService } from '../../core/services/era-theme.service';
 import { Tournament } from '../../core/models/tournament.model';
 import { Clipping } from '../../core/models/clipping.model';
@@ -17,7 +18,7 @@ import { TournamentPageData } from './tournament.resolver';
   selector: 'app-tournament',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [TranslatePipe, MastheadComponent, NewspaperClippingComponent],
+  imports: [TranslatePipe, MastheadComponent, NewspaperClippingComponent, StatsBarChartComponent],
   templateUrl: './tournament.component.html',
   styleUrl: './tournament.component.scss',
 })
@@ -80,6 +81,25 @@ export class TournamentComponent implements OnInit, OnDestroy {
 
   get regularClippings(): Clipping[] {
     return this.clippings().filter(c => !c.isFeatured);
+  }
+
+  // Historical goals data for all 22 tournaments — used in the infographic bar chart
+  private static readonly GOALS_BY_YEAR: Record<number, number> = {
+    1930: 70, 1934: 70, 1938: 84, 1950: 88, 1954: 140, 1958: 126,
+    1962: 89, 1966: 89, 1970: 95,  1974: 97,  1978: 102, 1982: 146,
+    1986: 132, 1990: 115, 1994: 141, 1998: 171, 2002: 161, 2006: 147,
+    2010: 145, 2014: 171, 2018: 169, 2022: 172,
+  };
+
+  get goalsBars(): StatBar[] {
+    const t = this.tournament();
+    if (!t || !t.goalsTotal) return [];
+    return Object.entries(TournamentComponent.GOALS_BY_YEAR)
+      .map(([year, goals]) => ({
+        label: year,
+        value: goals,
+        highlight: Number(year) === t.year,
+      }));
   }
 
   // Groups of 2+ clippings that share a primary tag but come from different countries

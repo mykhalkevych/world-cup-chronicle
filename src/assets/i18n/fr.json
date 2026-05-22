@@ -4,7 +4,9 @@
     "archive": "Archives",
     "worldCup2026": "Coupe du Monde 2026",
     "players": "Joueurs",
-    "language": "Langue"
+    "language": "Langue",
+    "soundOn": "Son activé",
+    "soundOff": "Son désactivé"
   },
   "masthead": {
     "subtitle": "Une Histoire Complète des Coupes du Monde de la FIFA",
@@ -26,7 +28,8 @@
     "pageTitle": "Coupe du Monde {{year}} — The World Cup Chronicle",
     "clippings": "Des Archives",
     "hostCountry": "Pays Hôte",
-    "perspectives": "Dans la Presse"
+    "perspectives": "Dans la Presse",
+    "goalsChart": "Buts Marqués — Toutes les Coupes du Monde"
   },
   "player": {
     "yearsActive": "Années Actif",
