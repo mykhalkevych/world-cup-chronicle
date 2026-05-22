@@ -25,7 +25,8 @@
     "teams": "{{count}} teams",
     "pageTitle": "{{year}} FIFA World Cup — The World Cup Chronicle",
     "clippings": "From the Archive",
-    "hostCountry": "Host Country"
+    "hostCountry": "Host Country",
+    "perspectives": "From the Press"
   },
   "player": {
     "yearsActive": "Years Active",

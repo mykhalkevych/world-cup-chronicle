@@ -1,8 +1,10 @@
 import {
-  Component, ChangeDetectionStrategy, inject, OnInit, OnDestroy, signal
+  Component, ChangeDetectionStrategy, inject, OnInit, OnDestroy, signal, DOCUMENT
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Title, Meta } from '@angular/platform-browser';
+import { isPlatformServer } from '@angular/common';
+import { PLATFORM_ID } from '@angular/core';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { MastheadComponent } from '../../shared/components/masthead/masthead.component';
 import { NewspaperClippingComponent } from '../../shared/components/newspaper-clipping/newspaper-clipping.component';
@@ -25,6 +27,8 @@ export class TournamentComponent implements OnInit, OnDestroy {
   private meta = inject(Meta);
   private translate = inject(TranslateService);
   private eraTheme = inject(EraThemeService);
+  private document = inject(DOCUMENT);
+  private platformId = inject(PLATFORM_ID);
   tournament = signal<Tournament | null>(null);
   clippings = signal<Clipping[]>([]);
   featuredClipping = signal<Clipping | null>(null);
@@ -41,11 +45,30 @@ export class TournamentComponent implements OnInit, OnDestroy {
         .get('tournament.pageTitle', { year: data.tournament.year })
         .subscribe(title => this.titleService.setTitle(title));
 
-      this.meta.updateTag({ name: 'description', content: data.tournament.summary });
-      this.meta.updateTag({ property: 'og:title', content: `${data.tournament.year} FIFA World Cup` });
-      this.meta.updateTag({ property: 'og:description', content: data.tournament.summary });
-      this.meta.updateTag({ property: 'og:type', content: 'article' });
+      const { year, summary, hostCountry, champion } = data.tournament;
+      const ogImage = `https://world-cup-chronicle.web.app/og/${year}.png`;
 
+      this.meta.updateTag({ name: 'description', content: summary });
+      this.meta.updateTag({ property: 'og:title', content: `${year} FIFA World Cup` });
+      this.meta.updateTag({ property: 'og:description', content: summary });
+      this.meta.updateTag({ property: 'og:type', content: 'article' });
+      this.meta.updateTag({ property: 'og:image', content: ogImage });
+      this.meta.updateTag({ name: 'twitter:card', content: 'summary_large_image' });
+      this.meta.updateTag({ name: 'twitter:image', content: ogImage });
+
+      if (isPlatformServer(this.platformId)) {
+        const jsonLd = {
+          '@context': 'https://schema.org',
+          '@type': 'Event',
+          name: `${year} FIFA World Cup`,
+          location: { '@type': 'Country', name: hostCountry },
+          winner: { '@type': 'SportsTeam', name: champion },
+        };
+        const script = this.document.createElement('script');
+        script.type = 'application/ld+json';
+        script.text = JSON.stringify(jsonLd);
+        this.document.head.appendChild(script);
+      }
     }
   }
 
@@ -57,5 +80,26 @@ export class TournamentComponent implements OnInit, OnDestroy {
 
   get regularClippings(): Clipping[] {
     return this.clippings().filter(c => !c.isFeatured);
+  }
+
+  // Groups of 2+ clippings that share a primary tag but come from different countries
+  get perspectiveGroups(): { tag: string; clippings: Clipping[] }[] {
+    const groups = new Map<string, Clipping[]>();
+    for (const c of this.regularClippings) {
+      const tag = c.tags[0];
+      if (!tag) continue;
+      const group = groups.get(tag) ?? [];
+      group.push(c);
+      groups.set(tag, group);
+    }
+    return Array.from(groups.entries())
+      .filter(([, clips]) => clips.length > 1 && new Set(clips.map(c => c.country)).size > 1)
+      .map(([tag, clippings]) => ({ tag, clippings }));
+  }
+
+  // Clippings not part of any perspective group — shown in the regular grid
+  get singleClippings(): Clipping[] {
+    const inGroup = new Set(this.perspectiveGroups.flatMap(g => g.clippings.map(c => c.id)));
+    return this.regularClippings.filter(c => !inGroup.has(c.id));
   }
 }

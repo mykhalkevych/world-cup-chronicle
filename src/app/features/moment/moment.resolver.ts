@@ -1,8 +1,11 @@
 import { inject } from '@angular/core';
 import { ResolveFn } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 import { isPlatformServer } from '@angular/common';
 import { PLATFORM_ID } from '@angular/core';
 import { makeStateKey, TransferState } from '@angular/core';
+import { firstValueFrom, of } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { Moment } from '../../core/models/moment.model';
 import { Clipping } from '../../core/models/clipping.model';
 import { NotionService } from '../../core/services/notion.service';
@@ -20,24 +23,28 @@ export const momentResolver: ResolveFn<MomentPageData> = async (route) => {
 
   const KEY = makeStateKey<MomentPageData>(`moment-${slug}`);
 
-  if (!isPlatformServer(platformId)) {
-    const cached = transferState.get<MomentPageData | null>(KEY, null);
-    if (cached) {
-      transferState.remove(KEY);
-      return cached;
-    }
-    return { moment: null, clippings: [] };
+  if (isPlatformServer(platformId)) {
+    const moment = await notion.getMomentBySlug(slug);
+    const clippings = moment
+      ? await Promise.all(
+          moment.clippingIds.map(id => notion.getClippingsByTournament(id))
+        ).then(groups => groups.flat())
+      : [];
+    const data: MomentPageData = { moment, clippings };
+    transferState.set(KEY, data);
+    return data;
   }
 
-  const moment = await notion.getMomentBySlug(slug);
-  // Clippings for a moment come from multiple countries — each is its own perspective
-  const clippings = moment
-    ? await Promise.all(
-        moment.clippingIds.map(id => notion.getClippingsByTournament(id))
-      ).then(groups => groups.flat())
-    : [];
+  const cached = transferState.get<MomentPageData | null>(KEY, null);
+  if (cached) {
+    transferState.remove(KEY);
+    return cached;
+  }
 
-  const data: MomentPageData = { moment, clippings };
-  transferState.set(KEY, data);
-  return data;
+  const http = inject(HttpClient);
+  return firstValueFrom(
+    http.get<MomentPageData>(`/api/moment/${slug}`).pipe(
+      catchError(() => of({ moment: null, clippings: [] as Clipping[] }))
+    )
+  );
 };

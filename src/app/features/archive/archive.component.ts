@@ -1,12 +1,12 @@
-import {
-  Component, ChangeDetectionStrategy, inject, signal
-} from '@angular/core';
+import { Component, ChangeDetectionStrategy, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
 import { Title } from '@angular/platform-browser';
 import { TranslatePipe } from '@ngx-translate/core';
+import { firstValueFrom, of } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { MastheadComponent } from '../../shared/components/masthead/masthead.component';
 import { NewspaperClippingComponent } from '../../shared/components/newspaper-clipping/newspaper-clipping.component';
-import { NotionService } from '../../core/services/notion.service';
 import { Clipping } from '../../core/models/clipping.model';
 
 @Component({
@@ -18,10 +18,11 @@ import { Clipping } from '../../core/models/clipping.model';
   styleUrl: './archive.component.scss',
 })
 export class ArchiveComponent {
-  private notion = inject(NotionService);
+  private http = inject(HttpClient);
   private titleService = inject(Title);
 
-  query = signal('');
+  // Plain string for two-way ngModel binding
+  queryValue = '';
   results = signal<Clipping[]>([]);
   searching = signal(false);
   searched = signal(false);
@@ -31,11 +32,14 @@ export class ArchiveComponent {
   }
 
   async search(): Promise<void> {
-    const q = this.query();
-    if (!q.trim()) return;
+    if (!this.queryValue.trim()) return;
 
     this.searching.set(true);
-    const clippings = await this.notion.searchClippings(q);
+    const clippings = await firstValueFrom(
+      this.http
+        .get<Clipping[]>(`/api/search?q=${encodeURIComponent(this.queryValue)}`)
+        .pipe(catchError(() => of([])))
+    );
     this.results.set(clippings);
     this.searching.set(false);
     this.searched.set(true);

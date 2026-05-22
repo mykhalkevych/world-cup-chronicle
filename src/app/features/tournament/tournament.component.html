@@ -50,11 +50,27 @@
       @if (clippings().length) {
         <section aria-label="Archive clippings">
           <h2 class="section-heading">{{ 'tournament.clippings' | translate }}</h2>
-          <div class="columns-grid">
-            @for (clipping of regularClippings; track clipping.id) {
-              <app-newspaper-clipping [clipping]="clipping" (clicked)="onClippingClick($event)" />
-            }
-          </div>
+
+          @for (group of perspectiveGroups; track group.tag) {
+            <div class="perspectives">
+              <p class="perspectives__label byline">
+                {{ 'tournament.perspectives' | translate }}: {{ group.tag }}
+              </p>
+              <div class="perspectives-grid">
+                @for (clipping of group.clippings; track clipping.id) {
+                  <app-newspaper-clipping [clipping]="clipping" (clicked)="onClippingClick($event)" />
+                }
+              </div>
+            </div>
+          }
+
+          @if (singleClippings.length) {
+            <div class="columns-grid">
+              @for (clipping of singleClippings; track clipping.id) {
+                <app-newspaper-clipping [clipping]="clipping" (clicked)="onClippingClick($event)" />
+              }
+            </div>
+          }
         </section>
       } @else {
         <div class="archive-unavailable">
