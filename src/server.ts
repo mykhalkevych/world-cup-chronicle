@@ -38,6 +38,35 @@ function mapTournament(page: any) {
   };
 }
 
+function mapPlayer(page: any) {
+  const p = page.properties;
+  return {
+    id: page.id,
+    name: p['Name']?.title?.[0]?.plain_text ?? '',
+    slug: p['Slug']?.rich_text?.[0]?.plain_text ?? '',
+    country: p['Country']?.select?.name ?? '',
+    yearsActive: p['Years Active']?.rich_text?.[0]?.plain_text ?? '',
+    tournaments: p['Tournaments']?.multi_select?.map((t: any) => parseInt(t.name)) ?? [],
+    goals: p['Goals']?.number ?? 0,
+    role: p['Role']?.select?.name ?? 'Forward',
+    nickname: p['Nickname']?.rich_text?.[0]?.plain_text ?? null,
+    bio: p['Bio']?.rich_text?.map((r: any) => r.plain_text).join('') ?? '',
+  };
+}
+
+function mapMoment(page: any) {
+  const p = page.properties;
+  return {
+    id: page.id,
+    name: p['Name']?.title?.[0]?.plain_text ?? '',
+    slug: p['Slug']?.rich_text?.[0]?.plain_text ?? '',
+    tournamentId: p['Tournament']?.relation?.[0]?.id ?? '',
+    minute: p['Minute']?.number ?? 0,
+    description: p['Description']?.rich_text?.map((r: any) => r.plain_text).join('') ?? '',
+    clippingIds: p['Clippings']?.relation?.map((r: any) => r.id) ?? [],
+  };
+}
+
 function mapClipping(page: any) {
   const p = page.properties;
   return {
@@ -89,6 +118,55 @@ app.get('/api/clippings/:tournamentId', async (req, res) => {
     res.json(result.results.map(mapClipping));
   } catch (err) {
     console.error('[API] /api/clippings/:tournamentId', err);
+    res.status(500).json([]);
+  }
+});
+
+app.get('/api/player/:slug', async (req, res) => {
+  try {
+    const notion = notionClient();
+    const result = await notion.databases.query({
+      database_id: process.env['NOTION_PLAYERS_DB'] ?? '',
+      filter: { property: 'Slug', rich_text: { equals: req.params['slug'] } },
+    });
+    res.json(result.results[0] ? mapPlayer(result.results[0]) : null);
+  } catch (err) {
+    console.error('[API] /api/player/:slug', err);
+    res.status(500).json(null);
+  }
+});
+
+app.get('/api/moment/:slug', async (req, res) => {
+  try {
+    const notion = notionClient();
+    const momentResult = await notion.databases.query({
+      database_id: process.env['NOTION_MOMENTS_DB'] ?? '',
+      filter: { property: 'Slug', rich_text: { equals: req.params['slug'] } },
+    });
+    if (!momentResult.results[0]) { res.json({ moment: null, clippings: [] }); return; }
+    const moment = mapMoment(momentResult.results[0]);
+    const clippings = await Promise.all(
+      moment.clippingIds.map((id: string) => notion.pages.retrieve({ page_id: id }).then(mapClipping))
+    );
+    res.json({ moment, clippings });
+  } catch (err) {
+    console.error('[API] /api/moment/:slug', err);
+    res.status(500).json({ moment: null, clippings: [] });
+  }
+});
+
+app.get('/api/search', async (req, res) => {
+  try {
+    const q = String(req.query['q'] ?? '').trim();
+    if (!q) { res.json([]); return; }
+    const notion = notionClient();
+    const result = await notion.databases.query({
+      database_id: process.env['NOTION_CLIPPINGS_DB'] ?? '',
+      filter: { property: 'Headline', title: { contains: q } },
+    });
+    res.json(result.results.map(mapClipping));
+  } catch (err) {
+    console.error('[API] /api/search', err);
     res.status(500).json([]);
   }
 });

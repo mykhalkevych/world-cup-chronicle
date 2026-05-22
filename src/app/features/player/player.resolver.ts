@@ -1,8 +1,11 @@
 import { inject } from '@angular/core';
 import { ResolveFn } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 import { isPlatformServer } from '@angular/common';
 import { PLATFORM_ID } from '@angular/core';
 import { makeStateKey, TransferState } from '@angular/core';
+import { firstValueFrom, of } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { Player } from '../../core/models/player.model';
 import { NotionService } from '../../core/services/notion.service';
 
@@ -14,16 +17,20 @@ export const playerResolver: ResolveFn<Player | null> = async (route) => {
 
   const KEY = makeStateKey<Player | null>(`player-${slug}`);
 
-  if (!isPlatformServer(platformId)) {
-    const cached = transferState.get<Player | null>(KEY, null);
-    if (cached) {
-      transferState.remove(KEY);
-      return cached;
-    }
-    return null;
+  if (isPlatformServer(platformId)) {
+    const player = await notion.getPlayerBySlug(slug);
+    transferState.set(KEY, player);
+    return player;
   }
 
-  const player = await notion.getPlayerBySlug(slug);
-  transferState.set(KEY, player);
-  return player;
+  const cached = transferState.get<Player | null>(KEY, null);
+  if (cached) {
+    transferState.remove(KEY);
+    return cached;
+  }
+
+  const http = inject(HttpClient);
+  return firstValueFrom(
+    http.get<Player | null>(`/api/player/${slug}`).pipe(catchError(() => of(null)))
+  );
 };
